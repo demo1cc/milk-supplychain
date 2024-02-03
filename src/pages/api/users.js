@@ -2,12 +2,44 @@
 import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
 
+import bcrypt from 'bcrypt';
+
+var jwt = require('jsonwebtoken');
+
 connectDB();
 // Create a simple user schema
 const userSchema = new mongoose.Schema({
-  username: String,
+  name: {type:String, required:true},
+  role: {type:String, default:"farmer"},
+  mobile: {type:String, required:true},
+  password: {type:String, required:true},
   email: String,
+  address: {
+    address1: String,
+    address2: String,
+    city: String,
+    state: String,
+    pin: String,
+  },
+  created: { type: Date, default: Date.now },
+  updated: { type: Date, default: Date.now },
 });
+
+// Hash the password before saving
+userSchema.pre('save', async function (next) {
+  const user = this;
+  if (!user.isModified('password')) return next();
+
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(user.password, salt);
+  user.password = hashedPassword;
+  next();
+});
+
+// Compare password method
+userSchema.methods.comparePassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
@@ -15,6 +47,16 @@ export default async function handler(req, res) {
 
   switch (req.method) {
     case 'GET':
+      if (req.query.id){
+        try {
+          const updatedUser = await User.findById(req.query.id);
+          res.status(200).json(updatedUser);
+        } catch (error) {
+          console.error(error);
+          res.status(404).send('User not found');
+        }
+
+      } else {
       try {
         const page = parseInt(req.query.page) || 1;
         const pageSize = parseInt(req.query.pageSize) || 10;
@@ -34,22 +76,82 @@ export default async function handler(req, res) {
             totalCount,
             totalPages,
       });
+      
       } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
       }
+      }
       break;
     case 'POST':
+
+      if (req.query.type=="create-user"){
       try {
-        const { username, email } = req.body;
-        const newUser = new User({ username, email });
+        const newUser = new User(req.body);
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
       } catch (error) {
         console.error(error);
         res.status(500).send('Internal Server Error');
       }
+      } 
+
+      else if (req.query.type=="login"){
+
+        try {
+          const { mobile, password } = req.body;
+          // console.log(username, password);
+          const user = await User.findOne({ mobile });
+      
+          // console.log(member);
+      
+          if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+      
+          const isPasswordValid = await user.comparePassword(password);
+      
+          if (!isPasswordValid) return res.status(401).json({ message: 'Invalid password' });
+      
+          const token = jwt.sign({ mobile: user.mobile, userId: user._id }, process.env.JWT_SECRET, {
+            expiresIn: '30d', // Token expires in 1 hour
+          });
+      
+          res.json({ token, user });
+        } catch (error) {
+          res.status(500).json({ error: error.message });
+        }
+      }
+
+      res.status(500).send('Provide a valid query');
+
+
       break;
+    
+    case 'PUT':
+        try {
+          const { id, ...updatedData } = req.body;
+          const updatedUser = await User.findByIdAndUpdate(id, updatedData, { new: true });
+          res.status(200).json(updatedUser);
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal Server Error');
+        }
+        break;
+
+    case 'DELETE':
+      try {
+        const { id } = req.body;
+        let deletedUser = await User.findByIdAndDelete(id);
+        console.log("sdnfkandjka", deletedUser)
+        res.status(200).send({
+          "message":"deleted successfully",
+          deletedUser
+        });
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+      }
+      break;
+
     default:
       res.status(405).send('Method Not Allowed');
   }

@@ -17,7 +17,7 @@ const cowsSchema = new mongoose.Schema({
 
 
 
-const Cow = mongoose.model('Cow', cowsSchema);
+const Cow = mongoose.models.Cow || mongoose.model('Cow', cowsSchema);
 
 export default async function handler(req, res) {
 

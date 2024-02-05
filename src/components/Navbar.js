@@ -4,70 +4,6 @@ import { PiUser } from "react-icons/pi";
 
 const Navbar = () => {
   return (
-    //     <div
-    //       className="navbar bg-base-200 "
-    //     //   style={{ borderBottom: "1.4px solid #a4a4a4" }}
-    //     >
-    //       <div className="flex-1">
-    //         <Link
-    //           href={"/"}
-    //           className="btn btn-ghost normal-case text-xl text-primary"
-    //         >
-    //           Milk-Supplychain
-    //         </Link>
-    //       </div>
-    //       <div className="flex-none">
-    //         <ul className="menu menu-horizontal dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-
-    //           <li>
-    //             <Link href="#">Dashboard</Link>
-    //           </li>
-
-    //           <li>
-    //             <Link href="#">Contact</Link>
-    //           </li>
-    // {/*
-    //             <li>
-    //               <Link href="#">
-    //                 Login
-    //               </Link>
-    //             </li>
-    //          */}
-
-    //             <div className="dropdown dropdown-end">
-    //               <div
-    //                 tabIndex={0}
-    //                 role="button"
-    //                 className="btn btn-ghost btn-circle avatar"
-    //               >
-    //                   <PiUser size={24} />
-    //                   {/* <img
-    //                     alt="Member Profile"
-    //                     src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-    //                   /> */}
-    //               </div>
-    //               <ul
-    //                 tabIndex={0}
-    //                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-    //               >
-    //                 <li>
-    //                   <Link href="#" className="justify-between">
-    //                     Profile
-    //                     {/* <span className="badge">New</span> */}
-    //                   </Link>
-    //                 </li>
-    //                 {/* <li>
-    //                   <a>Settings</a>
-    //                 </li> */}
-    //                 <li>
-    //                   <button>Logout</button>
-    //                 </li>
-    //               </ul>
-    //             </div>
-
-    //         </ul>
-    //       </div>
-    //     </div>
     <div className="navbar bg-base-200">
       <div className="navbar-start">
         <div className="dropdown">
@@ -87,30 +23,6 @@ const Navbar = () => {
               />
             </svg>
           </div>
-
-          {/* <ul
-            tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-          >
-            <li>
-               <Link href="#">Dashboard</Link>
-              {" "}
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
-                </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
-          </ul> */}
         </div>
         {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
         <div className="btn btn-ghost text-xl">
@@ -122,23 +34,26 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
-          <li>
-             <Link href="#">Dashboard</Link>
-      </li>
+          <ul className="menu menu-horizontal flex items-center px-1">
             <li>
-              <details>
-                <summary>Parent</summary>
-                <ul className="p-2">
-                  <li>
-                    <a>Submenu 1</a>
-                  </li>
-                  <li>
-                    <a>Submenu 2</a>
-                  </li>
-                </ul>
-              </details>
+              <Link href="#">Dashboard</Link>
             </li>
+            <div className="dropdown dropdown-hover">
+              <div tabIndex={0} role="button" className="btn m-1">
+                Hover
+              </div>
+              <ul
+                tabIndex={0}
+                className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <a>Item 1</a>
+                </li>
+                <li>
+                  <a>Item 2</a>
+                </li>
+              </ul>
+            </div>
             <li>
               <a>Item 3</a>
             </li>
@@ -146,7 +61,30 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-end">
-        <a className="btn">Button</a>
+        <div className="relative">
+          <div className="dropdown dropdown-hover">
+            <div
+              tabIndex={0}
+              role="button"
+              className="btn btn-ghost btn-circle avatar"
+            >
+              <PiUser size={24} />
+            </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-44 absolute left-auto right-0"
+            >
+              <li>
+                <Link href="#" className="justify-between">
+                  Profile
+                </Link>
+              </li>
+              <li>
+                <button>Logout</button>
+              </li>
+            </ul>
+          </div>
+        </div>
       </div>
     </div>
   );

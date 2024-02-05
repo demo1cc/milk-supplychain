@@ -6,13 +6,13 @@ import { myFetch } from "@/utils/myFetch";
 const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
-  React.useEffect(() => {
-    const fetchUsers = async () => {
-      let data = await myFetch("/api/users");
-      console.log(data);
-    };
-    fetchUsers();
-  }, []);
+  // React.useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     let data = await myFetch("/api/users");
+  //     console.log(data);
+  //   };
+  //   fetchUsers();
+  // }, []);
   return (
     <main
       className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}

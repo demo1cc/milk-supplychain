@@ -1,8 +1,11 @@
 import React from "react";
 import Link from "next/link";
 import { PiUser } from "react-icons/pi";
+import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
+
+  const {token, logout} = useAuth();
   return (
     <div className="navbar bg-base-200">
       <div className="navbar-start">
@@ -61,6 +64,7 @@ const Navbar = () => {
         </div>
       </div>
       <div className="navbar-end">
+
         <div className="relative">
           <div className="dropdown dropdown-hover">
             <div
@@ -80,7 +84,12 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-                <button>Logout</button>
+              {token && <button className="btn" onClick={logout}>Logout</button>}
+        {!token && 
+        <Link href={"/login"}>
+        <button className="btn">Login</button>
+        </Link>
+        }
               </li>
             </ul>
           </div>

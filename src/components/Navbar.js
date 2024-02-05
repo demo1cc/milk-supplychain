@@ -4,8 +4,7 @@ import { PiUser } from "react-icons/pi";
 import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
-
-  const {token, logout} = useAuth();
+  const { token, logout } = useAuth();
   return (
     <div className="navbar bg-base-200">
       <div className="navbar-start">
@@ -36,6 +35,7 @@ const Navbar = () => {
             Milk-Supplychain
           </Link>
         </div>
+        {token && 
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal flex items-center px-1">
             <li>
@@ -62,9 +62,10 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+}
       </div>
+        
       <div className="navbar-end">
-
         <div className="relative">
           <div className="dropdown dropdown-hover">
             <div
@@ -84,12 +85,16 @@ const Navbar = () => {
                 </Link>
               </li>
               <li>
-              {token && <button className="btn" onClick={logout}>Logout</button>}
-        {!token && 
-        <Link href={"/login"}>
-        <button className="btn">Login</button>
-        </Link>
-        }
+                {token && (
+                  <button className="justify-between" onClick={logout}>
+                    Logout
+                  </button>
+                )}
+                {!token && (
+                  <Link href={"/login"}>
+                    <span className="justify-between">Login</span>
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

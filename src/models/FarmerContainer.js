@@ -5,16 +5,14 @@ import connectDB from '@/utils/db';
 
 connectDB();
 // Create a simple user schema
-const cowsSchema = new mongoose.Schema({
+const farmerContainerSchema = new mongoose.Schema({
   farmerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-  food: {type:String},
-  milkingSystem: {type:String},
-  breed: {type:String},
-  age: {type:Number},
+
+  capacity: { type: Number,}, 
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
 });
 
-const Cow = mongoose.models.Cow || mongoose.model('Cow', cowsSchema);
+const FarmerContainer = mongoose.models.FarmerContainer || mongoose.model('FarmerContainer', farmerContainerSchema);
 
- export default Cows;
+export default FarmerContainer;

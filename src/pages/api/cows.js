@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import Cows from '@/models/Cows';
+import Cow from '@/models/Cow';
 
 
 connectDB();
@@ -11,15 +11,17 @@ export default async function handler(req, res) {
     case 'GET':
       if (req.query.id){
         try {
-          const updatedCow = await Cow.findById(req.query.id);
-          res.status(200).json(updatedCow);
+          const cow = await Cow.findById(req.query.id);
+          await cow.populate(['farmerId'])
+          res.status(200).json(cow);
         } catch (error) {
-          console.error(error);
+          // console.error(error);
           res.status(404).send('Cow not found');
         }
 
       } else {
       try {
+        // console.log("Hello World")
         const page = parseInt(req.query.page) || 1;
         const pageSize = parseInt(req.query.pageSize) || 10;
         let query = {}; 
@@ -27,12 +29,13 @@ export default async function handler(req, res) {
         const totalCount = await Cow.countDocuments(query);
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const users = await Cow.find(query)
+        const cows = await Cow.find(query)
             .skip((page - 1) * pageSize)
+            .populate(['farmerId'])
             .limit(pageSize);
 
             res.json({
-            users,
+            cows,
             page,
             pageSize,
             totalCount,
@@ -49,6 +52,8 @@ export default async function handler(req, res) {
       try {
         const newCow = new Cow(req.body);
         const savedCow = await newCow.save();
+        await savedCow.populate(['farmerId'])
+
         res.status(201).json(savedCow);
       } catch (error) {
         console.error(error);
@@ -61,6 +66,7 @@ export default async function handler(req, res) {
         try {
           const { id, ...updatedData } = req.body;
           const updatedCow = await Cow.findByIdAndUpdate(id, updatedData, { new: true });
+          await updatedCow.populate(['farmerId'])
           res.status(200).json(updatedCow);
         } catch (error) {
           console.error(error);
@@ -72,7 +78,7 @@ export default async function handler(req, res) {
       try {
         const { id } = req.body;
         let deletedUser = await User.findByIdAndDelete(id);
-        console.log("sdnfkandjka", deletedCow)
+        // console.log("sdnfkandjka", deletedCow)
         res.status(200).send({
           "message":"deleted successfully",
           deletedCow

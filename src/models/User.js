@@ -6,7 +6,7 @@ import bcrypt from 'bcrypt';
 // Create a simple user schema
 const userSchema = new mongoose.Schema({
   name: {type:String, required:true},
-  role: {type:String, default:"farmer"},
+  role: {type:String, default:"farmer"}, // farmer or center
   mobile: {type:String, required:true},
   password: {type:String, required:true},
   email: String,

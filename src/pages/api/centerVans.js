@@ -25,6 +25,11 @@ export default async function handler(req, res) {
           const page = parseInt(req.query.page) || 1;
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
+
+          if (req.query.centerId) {
+            query.centerId = req.query.centerId;
+          }
+          
   
           const totalCount = await CenterVan.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);

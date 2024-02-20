@@ -1,9 +1,9 @@
 import mongoose from 'mongoose';
-import connectDB from '@/utils/db';
+// import connectDB from '@/utils/db';
 
 
 
-connectDB();
+// connectDB();
 // Create a simple user schema
 const centerFarmerSchema = new mongoose.Schema({
   centerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },

@@ -25,7 +25,9 @@ export default async function handler(req, res) {
           const page = parseInt(req.query.page) || 1;
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
-  
+          if (req.query.farmerId) {
+            query.farmerId = req.query.farmerId;
+          }
           const totalCount = await FarmerContainer.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);
   

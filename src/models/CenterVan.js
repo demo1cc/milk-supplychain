@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
-import connectDB from '@/utils/db';
+// import connectDB from '@/utils/db';
 
-connectDB();
+// connectDB();
 // Create a simple user schema
 const centerVanSchema = new mongoose.Schema({
-  centerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
 
-  name: { type: String},
+  centerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  
+  name: { type: String}, // Tata Van 
   vehicleNumber: { type: String }, 
   
   created: { type: Date, default: Date.now },

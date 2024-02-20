@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { myFetch } from '@/utils/myFetch';
 
 export default function Login() {
-  const { token, login } = useAuth();
+  const { token, login, authUser } = useAuth();
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -27,10 +27,14 @@ export default function Login() {
   };
 
   React.useEffect(() => {
-    if (token) {
-    //   router.push('/dashboard');
-    }
-  }, [token]);
+    if (authUser) {
+      if (authUser?.role === "farmer") {
+        router.push('/farmer-dashboard');
+      } else {
+        router.push('/center-dashboard');
+      }
+  }
+  }, [authUser]);
 
   
   const handleSubmit = async (e) => {

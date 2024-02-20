@@ -26,16 +26,20 @@ export default async function handler(req, res) {
         const pageSize = parseInt(req.query.pageSize) || 10;
         let query = {}; 
 
+        if (req.query.farmerId) {
+          query.farmerId = req.query.farmerId;
+        }
+
         const totalCount = await Cow.countDocuments(query);
         const totalPages = Math.ceil(totalCount / pageSize);
 
-        const cows = await Cow.find(query)
+        const farmerCows = await Cow.find(query)
             .skip((page - 1) * pageSize)
             .populate(['farmerId'])
             .limit(pageSize);
 
             res.json({
-            cows,
+            farmerCows,
             page,
             pageSize,
             totalCount,

@@ -27,7 +27,7 @@ const Navbar = () => {
           </div>
         </div>
         {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
-        <div className="btn btn-ghost text-xl">
+        <div className="text-xl">
           <Link
             href={"/"}
             className="btn btn-ghost normal-case text-xl text-primary"
@@ -39,7 +39,7 @@ const Navbar = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal flex items-center px-1">
             <li>
-              <Link href="#">Dashboard</Link>
+              <Link href="/dashboard">Dashboard</Link>
             </li>
             <div className="dropdown dropdown-hover">
               <div tabIndex={0} role="button" className="btn m-1">
@@ -67,7 +67,7 @@ const Navbar = () => {
         
       <div className="navbar-end">
         <div className="relative">
-          <div className="dropdown dropdown-hover">
+          <div className="dropdown">
             <div
               tabIndex={0}
               role="button"

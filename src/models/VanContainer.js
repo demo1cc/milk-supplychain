@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-import connectDB from '@/utils/db';
+// import connectDB from '@/utils/db';
 
-connectDB();
+// connectDB();
 // Create a simple user schema
 const vanContainerSchema = new mongoose.Schema({
   vanId: {type: mongoose.Schema.Types.ObjectId, ref: 'CenterVan', required: true },

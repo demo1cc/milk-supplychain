@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import ProductQuality from '@/models/ProductQuality';
+import ProductQuality from '@/models/ProductQuality.mjs';
 
 // connectDB();
 
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         if (req.query.id){
           try {
             const productQuality = await ProductQuality.findById(req.query.id);
-            await productQuality.populate(['preProductQualityId'])
+            // await productQuality.populate(['preProductQualityId'])
             res.status(200).json(productQuality);
           } catch (error) {
             // console.error(error);
@@ -30,8 +30,10 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const productQualitys = await ProductQuality.find(query)
+          .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
-              .populate(['preProductQualityId',])
+              // .populate(['preProductQualityId',])
               .limit(pageSize);
   
               res.json({
@@ -52,7 +54,7 @@ export default async function handler(req, res) {
         try {
           const newProductQuality = new ProductQuality(req.body);
           const savedProductQuality = await newProductQuality.save();
-          await savedProductQuality.populate(['preProductQualityId',])
+          // await savedProductQuality.populate(['preProductQualityId',])
   
           res.status(201).json(savedProductQuality);
         } catch (error) {
@@ -66,7 +68,7 @@ export default async function handler(req, res) {
           try {
             const { id, ...updatedData } = req.body;
             const updatedProductQuality = await ProductQuality.findByIdAndUpdate(id, updatedData, { new: true });
-            await updatedProductQuality.populate(['preProductQualityId',])
+            // await updatedProductQuality.populate(['preProductQualityId',])
             res.status(200).json(updatedProductQuality);
           } catch (error) {
             console.error(error);

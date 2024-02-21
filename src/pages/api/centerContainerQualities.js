@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import CenterContainerQuality from '@/models/CenterContainerQuality';
+import CenterContainerQuality from '@/models/CenterContainerQuality.mjs';
 
 // connectDB();
 
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         if (req.query.id){
           try {
             const centerContainerQuality = await CenterContainerQuality.findById(req.query.id);
-            await centerContainerQuality.populate(['centerId'])
+            // await centerContainerQuality.populate(['centerId'])
             res.status(200).json(centerContainerQuality);
           } catch (error) {
             // console.error(error);
@@ -30,8 +30,10 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const centerContainerQualitys = await CenterContainerQuality.find(query)
+              .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
-              .populate(["centerId"])
+              // .populate(["centerId"])
               .limit(pageSize);
   
               res.json({
@@ -52,7 +54,7 @@ export default async function handler(req, res) {
         try {
           const newCenterContainerQuality = new CenterContainerQuality(req.body);
           const savedCenterContainerQuality = await newCenterContainerQuality.save();
-          await savedCenterContainerQuality.populate(['centerId',])
+          // await savedCenterContainerQuality.populate(['centerId',])
   
           res.status(201).json(savedCenterContainerQuality);
         } catch (error) {
@@ -66,7 +68,7 @@ export default async function handler(req, res) {
           try {
             const { id, ...updatedData } = req.body;
             const updatedCenterContainerQuality = await CenterContainerQuality.findByIdAndUpdate(id, updatedData, { new: true });
-            await updatedCenterContainerQuality.populate(['centerId',])
+            // await updatedCenterContainerQuality.populate(['centerId',])
             res.status(200).json(updatedCenterContainerQuality);
           } catch (error) {
             console.error(error);

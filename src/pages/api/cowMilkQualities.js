@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import CowMilkQuality from '@/models/CowMilkQuality';
+import CowMilkQuality from '@/models/CowMilkQuality.mjs';
 
 // import User from '@/models/User';
 import Cow from '@/models/Cow.mjs';
@@ -15,7 +15,7 @@ export default async function handler(req, res) {
         if (req.query.id){
           try {
             const cowMilkQuality = await CowMilkQuality.findById(req.query.id);
-            await cowMilkQuality.populate(['cowId'])
+            // await cowMilkQuality.populate(['cowId'])
             res.status(200).json(cowMilkQuality);
           } catch (error) {
             // console.error(error);
@@ -55,6 +55,8 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const cowMilkQualitys = await CowMilkQuality.find(query)
+          .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
               // .populate(["cowId"])
               .limit(pageSize);
@@ -77,7 +79,7 @@ export default async function handler(req, res) {
         try {
           const newCowMilkQuality = new CowMilkQuality(req.body);
           const savedCowMilkQuality = await newCowMilkQuality.save();
-          await savedCowMilkQuality.populate(['cowId',])
+          // await savedCowMilkQuality.populate(['cowId',])
   
           res.status(201).json(savedCowMilkQuality);
         } catch (error) {
@@ -91,7 +93,7 @@ export default async function handler(req, res) {
           try {
             const { id, ...updatedData } = req.body;
             const updatedCowMilkQuality = await CowMilkQuality.findByIdAndUpdate(id, updatedData, { new: true });
-            await updatedCowMilkQuality.populate(['cowId',])
+            // await updatedCowMilkQuality.populate(['cowId',])
             res.status(200).json(updatedCowMilkQuality);
           } catch (error) {
             console.error(error);

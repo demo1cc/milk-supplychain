@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import ContainerMilkQuality from '@/models/ContainerMilkQuality';
+import ContainerMilkQuality from '@/models/ContainerMilkQuality.mjs';
 
 // connectDB();
 
@@ -25,11 +25,20 @@ export default async function handler(req, res) {
           const page = parseInt(req.query.page) || 1;
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
+
+          if (req.query.containerId) {
+            query.containerId = req.query.containerId;
+          }
+
+          if (req.query.checkedAtCenter) {
+            query.checkedAtCenter = req.query.checkedAtCenter;
+          }
   
           const totalCount = await ContainerMilkQuality.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const containerMilkQualitys = await ContainerMilkQuality.find(query)
+          .sort({ created: -1 })
               .skip((page - 1) * pageSize)
               .populate(["containerId"])
               .limit(pageSize);

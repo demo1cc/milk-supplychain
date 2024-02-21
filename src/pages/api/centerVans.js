@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import CenterVan from '@/models/CenterVan';
+import CenterVan from '@/models/CenterVan.mjs';
 
 // connectDB();
 
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         if (req.query.id){
           try {
             const centerVan = await CenterVan.findById(req.query.id);
-            await centerVan.populate(["centerId"])
+            // await centerVan.populate(["centerId"])
             res.status(200).json(centerVan);
           } catch (error) {
             // console.error(error);
@@ -35,8 +35,10 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const centerVans = await CenterVan.find(query)
+              .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
-              .populate(["centerId"])
+              // .populate(["centerId"])
               .limit(pageSize);
   
               res.json({
@@ -57,7 +59,7 @@ export default async function handler(req, res) {
         try {
           const newCenterVan = new CenterVan(req.body);
           const savedCenterVan = await newCenterVan.save();
-          await savedCenterVan.populate(["centerId"])
+          // await savedCenterVan.populate(["centerId"])
   
           res.status(201).json(savedCenterVan);
         } catch (error) {
@@ -71,7 +73,7 @@ export default async function handler(req, res) {
           try {
             const { id, ...updatedData } = req.body;
             const updatedCenterVan = await CenterVan.findByIdAndUpdate(id, updatedData, { new: true });
-            await updatedCenterVan.populate(["centerId"])
+            // await updatedCenterVan.populate(["centerId"])
             res.status(200).json(updatedCenterVan);
           } catch (error) {
             console.error(error);

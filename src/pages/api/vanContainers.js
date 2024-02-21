@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import VanContainer from '@/models/VanContainer';
+import VanContainer from '@/models/VanContainer.mjs';
 
 // connectDB();
 
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         if (req.query.id){
           try {
             const vanContainer = await VanContainer.findById(req.query.id);
-            await vanContainer.populate(['farmerId'])
+            // await vanContainer.populate(['farmerId'])
             res.status(200).json(vanContainer);
           } catch (error) {
             // console.error(error);
@@ -30,8 +30,10 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const vanContainers = await VanContainer.find(query)
+          .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
-              .populate(['farmerId',])
+              // .populate(['farmerId',])
               .limit(pageSize);
   
               res.json({
@@ -52,7 +54,7 @@ export default async function handler(req, res) {
         try {
           const newVanContainer = new VanContainer(req.body);
           const savedVanContainer = await newVanContainer.save();
-          await savedVanContainer.populate(['farmerId',])
+          // await savedVanContainer.populate(['farmerId',])
   
           res.status(201).json(savedVanContainer);
         } catch (error) {

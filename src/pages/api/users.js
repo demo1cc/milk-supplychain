@@ -35,6 +35,8 @@ export default async function handler(req, res) {
         const totalPages = Math.ceil(totalCount / pageSize);
 
         const users = await User.find(query)
+        .sort({ created: -1 })
+
             .skip((page - 1) * pageSize)
             .limit(pageSize);
 

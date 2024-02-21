@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import CenterFarmer from '@/models/CenterFarmer';
+import CenterFarmer from '@/models/CenterFarmer.mjs';
 
 // connectDB();
 
@@ -34,6 +34,7 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const centerFarmers = await CenterFarmer.find(query)
+              .sort({ created: -1 })
               .skip((page - 1) * pageSize)
               .populate(['farmerId', "centerId"])
               .limit(pageSize);

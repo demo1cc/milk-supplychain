@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import FarmerContainer from '@/models/FarmerContainer';
+import FarmerContainer from '@/models/FarmerContainer.mjs';
 
 // connectDB();
 
@@ -12,7 +12,7 @@ export default async function handler(req, res) {
         if (req.query.id){
           try {
             const farmerContainer = await FarmerContainer.findById(req.query.id);
-            await farmerContainer.populate(['farmerId'])
+            // await farmerContainer.populate(['farmerId'])
             res.status(200).json(farmerContainer);
           } catch (error) {
             // console.error(error);
@@ -32,8 +32,10 @@ export default async function handler(req, res) {
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const farmerContainers = await FarmerContainer.find(query)
+          .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
-              .populate(['farmerId',])
+              // .populate(['farmerId',])
               .limit(pageSize);
   
               res.json({
@@ -54,7 +56,7 @@ export default async function handler(req, res) {
         try {
           const newFarmerContainer = new FarmerContainer(req.body);
           const savedFarmerContainer = await newFarmerContainer.save();
-          await savedFarmerContainer.populate(['farmerId',])
+          // await savedFarmerContainer.populate(['farmerId',])
   
           res.status(201).json(savedFarmerContainer);
         } catch (error) {
@@ -68,7 +70,7 @@ export default async function handler(req, res) {
           try {
             const { id, ...updatedData } = req.body;
             const updatedFarmerContainer = await FarmerContainer.findByIdAndUpdate(id, updatedData, { new: true });
-            await updatedFarmerContainer.populate(['farmerId',])
+            // await updatedFarmerContainer.populate(['farmerId',])
             res.status(200).json(updatedFarmerContainer);
           } catch (error) {
             console.error(error);

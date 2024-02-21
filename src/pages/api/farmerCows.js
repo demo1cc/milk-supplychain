@@ -12,7 +12,7 @@ export default async function handler(req, res) {
       if (req.query.id){
         try {
           const cow = await Cow.findById(req.query.id);
-          await cow.populate(['farmerId'])
+          // await cow.populate(['farmerId'])
           res.status(200).json(cow);
         } catch (error) {
           // console.error(error);
@@ -34,8 +34,10 @@ export default async function handler(req, res) {
         const totalPages = Math.ceil(totalCount / pageSize);
 
         const farmerCows = await Cow.find(query)
+        .sort({ created: -1 })
+
             .skip((page - 1) * pageSize)
-            .populate(['farmerId'])
+            // .populate(['farmerId'])
             .limit(pageSize);
 
             res.json({
@@ -56,7 +58,7 @@ export default async function handler(req, res) {
       try {
         const newCow = new Cow(req.body);
         const savedCow = await newCow.save();
-        await savedCow.populate(['farmerId'])
+        // await savedCow.populate(['farmerId'])
 
         res.status(201).json(savedCow);
       } catch (error) {
@@ -70,7 +72,7 @@ export default async function handler(req, res) {
         try {
           const { id, ...updatedData } = req.body;
           const updatedCow = await Cow.findByIdAndUpdate(id, updatedData, { new: true });
-          await updatedCow.populate(['farmerId'])
+          // await updatedCow.populate(['farmerId'])
           res.status(200).json(updatedCow);
         } catch (error) {
           console.error(error);

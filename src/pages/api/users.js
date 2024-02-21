@@ -3,12 +3,12 @@
 import connectDB from '@/utils/db';
 
 // import bcrypt from 'bcrypt';
-import User from '@/models/User';
+import User from '@/models/User.mjs';
 
 var jwt = require('jsonwebtoken');
 
 
-connectDB();
+// connectDB();
 
 
 

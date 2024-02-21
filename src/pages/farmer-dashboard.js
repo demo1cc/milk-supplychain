@@ -16,7 +16,6 @@ export default function FarmerDashBoard() {
         )
     }
 
-
     return (
         <div className="py-4 px-8 bg-base-100">
             <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">

@@ -54,12 +54,15 @@ export default function FarmerCows(){
     {/* head */}
     <thead>
       <tr>
+        <th>ID</th>
         <th>Breed</th>
         <th>Milking System</th>
       </tr>
     </thead>
     <tbody>
       {farmerCows.map((farmerCow, index)=><tr key={index}>
+      <td>{farmerCow._id}</td>
+
       <td>{farmerCow.breed}</td>
         <td>{farmerCow.milkingSystem}</td>
       </tr>)}

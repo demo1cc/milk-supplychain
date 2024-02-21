@@ -15,4 +15,6 @@ const centerFarmerSchema = new mongoose.Schema({
 
 const CenterFarmer = mongoose.models.CenterFarmer || mongoose.model('CenterFarmer', centerFarmerSchema);
 
+// const CenterFarmer = mongoose.model('CenterFarmer', centerFarmerSchema);
+
 export default CenterFarmer;

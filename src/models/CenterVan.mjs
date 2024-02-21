@@ -16,4 +16,6 @@ const centerVanSchema = new mongoose.Schema({
 
 const CenterVan = mongoose.models.CenterVan || mongoose.model('CenterVan', centerVanSchema);
 
+// const CenterVan =  mongoose.model('CenterVan', centerVanSchema);
+
 export default CenterVan;

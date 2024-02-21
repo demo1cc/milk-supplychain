@@ -2,7 +2,10 @@
 import connectDB from '@/utils/db';
 import CowMilkQuality from '@/models/CowMilkQuality';
 
-connectDB();
+// import User from '@/models/User';
+import Cow from '@/models/Cow.mjs';
+
+// connectDB();
 
 
 export default async function handler(req, res) {
@@ -25,13 +28,35 @@ export default async function handler(req, res) {
           const page = parseInt(req.query.page) || 1;
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
+
+          if (req.query.storedInContainer) {
+            // Add a regex search for the nested memberId.name field
+            query.storedInContainer = req.query.storedInContainer;
+          }
+
+          let cowQuery = {};
+
+          if (req.query.farmerId) {
+            // Add a regex search for the nested memberId.name field
+            cowQuery.farmerId = req.query.farmerId;
+          }
+
+          const cows = await Cow.find(cowQuery);
+          // console.log(members);
+          const cowIds = cows.map(cow => cow._id);
+
+          if (cowQuery) {
+            // console.log(memberIds);
+            query.cowId = { $in: cowIds };
+          }
+
   
           const totalCount = await CowMilkQuality.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const cowMilkQualitys = await CowMilkQuality.find(query)
               .skip((page - 1) * pageSize)
-              .populate(["cowId"])
+              // .populate(["cowId"])
               .limit(pageSize);
   
               res.json({

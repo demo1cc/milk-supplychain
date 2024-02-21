@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import CenterVan from '@/models/CenterVan';
 
-connectDB();
+// connectDB();
 
 
 export default async function handler(req, res) {

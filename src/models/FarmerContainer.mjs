@@ -15,4 +15,6 @@ const farmerContainerSchema = new mongoose.Schema({
 
 const FarmerContainer = mongoose.models.FarmerContainer || mongoose.model('FarmerContainer', farmerContainerSchema);
 
+// const FarmerContainer =  mongoose.model('FarmerContainer', farmerContainerSchema);
+
 export default FarmerContainer;

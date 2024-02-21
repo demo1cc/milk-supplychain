@@ -9,10 +9,13 @@ const cowMilkQualitySchema = new mongoose.Schema({
   quantity: { type: Number},
   quality: { type: Object }, 
   
+  storedInContainer: { type: Boolean, default: false},
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
 });
 
 const CowMilkQuality = mongoose.models.CowMilkQuality || mongoose.model('CowMilkQuality', cowMilkQualitySchema);
+
+// const CowMilkQuality =  mongoose.model('CowMilkQuality', cowMilkQualitySchema);
 
 export default CowMilkQuality;

@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import VanContainer from '@/models/VanContainer';
 
-connectDB();
+// connectDB();
 
 
 export default async function handler(req, res) {

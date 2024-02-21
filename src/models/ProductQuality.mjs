@@ -17,5 +17,6 @@ const productQualitySchema = new mongoose.Schema({
 });
 
 const ProductQuality = mongoose.models.ProductQuality || mongoose.model('ProductQuality', productQualitySchema);
+// const ProductQuality =  mongoose.model('ProductQuality', productQualitySchema);
 
 export default ProductQuality;

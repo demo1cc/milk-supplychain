@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import CenterContainerQuality from '@/models/CenterContainerQuality';
 
-connectDB();
+// connectDB();
 
 
 export default async function handler(req, res) {

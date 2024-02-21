@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import FarmerContainer from '@/models/FarmerContainer';
 
-connectDB();
+// connectDB();
 
 
 export default async function handler(req, res) {

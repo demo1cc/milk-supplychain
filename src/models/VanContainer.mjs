@@ -14,4 +14,7 @@ const vanContainerSchema = new mongoose.Schema({
 
 const VanContainer = mongoose.models.VanContainer || mongoose.model('VanContainer', vanContainerSchema);
 
+// const VanContainer =  mongoose.model('VanContainer', vanContainerSchema);
+
+
 export default VanContainer;

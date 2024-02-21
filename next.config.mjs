@@ -1,8 +1,21 @@
 /** @type {import('next').NextConfig} */
+
+
+import initialSetup from './initialSetup.mjs';
+
+
 const nextConfig = {
   reactStrictMode: true,
   env: {
     MONGODB_URI: process.env.MONGODB_URI
+  },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      // Execute the registerModels function when the development server starts
+      initialSetup();
+    }
+
+    return config;
   },
 };
 

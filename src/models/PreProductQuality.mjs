@@ -17,4 +17,6 @@ const preProductQualitySchema = new mongoose.Schema({
 
 const PreProductQuality = mongoose.models.PreProductQuality || mongoose.model('PreProductQuality', preProductQualitySchema);
 
+// const PreProductQuality =  mongoose.model('PreProductQuality', preProductQualitySchema);
+
 export default PreProductQuality;

@@ -27,6 +27,14 @@ export default function Home() {
   //   fetchUsers();
   // }, []);
   return (
-    <h1>Home</h1>
+    <div className="hero min-h-screen bg-base-100">
+  <div className="hero-content text-center">
+    <div className="max-w-md">
+      <h1 className="text-5xl font-bold">Milk Supply Chain</h1>
+      <p className="py-6">This App is only for demo purpose. The App is developed by Coding Chaska Team</p>
+    <a href="https://www.codingchaska.com/"> <button className="btn btn-primary">Visit Coding Chaska</button> </a> 
+    </div>
+  </div>
+</div>
   );
 }

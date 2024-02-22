@@ -17,8 +17,8 @@ export const DataProvider = ({ children }) => {
         // Fetch complaints when the component mounts
         // In this example, fetching from an API
         if (authUser?.role === "center"){
-            fetchFarmers();
-            fetchVans();
+            fetchCenterFarmers();
+            fetchCenterVans();
         }
 
         if (authUser?.role === "farmer"){
@@ -31,7 +31,7 @@ export const DataProvider = ({ children }) => {
         try {
         let url = `/api/farmerCows?farmerId=`+authUser?._id;
         let data = await myFetch(url); 
-        console.log(data);
+        // console.log(data);
         setFarmerCowData(data);
         } catch (error) {
             console.error("Error fetching imposePenalties:", error);    
@@ -42,7 +42,7 @@ export const DataProvider = ({ children }) => {
         try {
         let url = `/api/farmerContainers?farmerId=`+authUser?._id;
         let data = await myFetch(url); 
-        console.log(data);
+        // console.log(data);
         setFarmerContainerData(data);
         } catch (error) {
             console.error("Error fetching imposePenalties:", error);    
@@ -50,10 +50,10 @@ export const DataProvider = ({ children }) => {
       }
 
     
-      const fetchFarmers = async () => {
+      const fetchCenterFarmers = async () => {
         try {
           const data = await myFetch("/api/centerFarmers?centerId="+authUser?._id);
-          console.log(data);
+          // console.log(data);
           
             setCenterFarmerData(data);
         //   setLoading(false); // Set loading to false in case of an error
@@ -62,11 +62,11 @@ export const DataProvider = ({ children }) => {
         }
       };
 
-      const fetchVans = async (page) => {
+      const fetchCenterVans = async (page) => {
         try {
         let url = `/api/centerVans?centerId=`+authUser?._id;
         let data = await myFetch(url); 
-        console.log(data);
+        // console.log(data);
         setCenterVanData(data);
         } catch (error) {
             console.error("Error fetching imposePenalties:", error);    
@@ -74,7 +74,7 @@ export const DataProvider = ({ children }) => {
       }
 
     return (
-        <DataContext.Provider value={{ centerFarmerData, centerVanData, farmerCowData, farmerContainerData }}>
+        <DataContext.Provider value={{ fetchFarmerCows,  fetchFarmerContainers, fetchCenterVans, fetchCenterFarmers, centerFarmerData, centerVanData, farmerCowData, farmerContainerData }}>
             {children}
         </DataContext.Provider>
     );

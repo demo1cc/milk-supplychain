@@ -1,96 +1,61 @@
-import React from 'react';
-import { useAuth } from '@/context/AuthContext';
-import { myFetch } from '@/utils/myFetch';
-import LoginRequired from '@/components/LoginRequired';
-import { showAlert } from '@/utils/showAlert';
+import { myFetch } from "@/utils/myFetch"
+import { useAuth } from "@/context/AuthContext"
+import LoginRequired from "@/components/LoginRequired"
+import React from "react";
+import { showAlert } from "@/utils/showAlert";
 
-export default function ProductCheck() {
+export default function StoreDataCenter() {
+
+    const {token, authUser} = useAuth();
+    const [containerIds, setContainerIds] = React.useState([]);
 
     const [submittedDB, setSubmittedDB] = React.useState(false);
     const [submittedBlockChain, setSubmittedBlockChain] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
     const [quality, setQuality] = React.useState({});
     const [quantity, setQuantity] = React.useState(null);
-    const [selected, setSelected] = React.useState();
 
-    const [preProductQualities, setPreProductQualities] = React.useState([]);
+    const [containerMilkQualityCenters, setContainerMilkQualityCenters] = React.useState([]);
+
 
     const handleChange = (e) => {
         setQuality({ ...quality, [e.target.name]: e.target.value });
       };
 
-    const {token, authUser} = useAuth();
-
-    const getPreProducts = async () => {
-
-       let url = "/api/preProductQualities?centerId=" + authUser._id +"&isProductChecked=" + false;
-
-       let data = await myFetch(url);
-       console.log(data);
-       setPreProductQualities(data.preProductQualitys)
-
-    } 
-
-    React.useEffect(()=> {
-        if (authUser){
-            getPreProducts();
-        }
-    }, [authUser])
-
-   
     const changeStatusToStored = async () => {
-        let url = "/api/preProductQualities"
-        let formData =  {
-            "id":  selected.split(",")[0],
-            "isProductChecked": true,
+        let url; 
+        for (let containerMilkQualityCenter of containerMilkQualityCenters) { 
+            url = "/api/containerMilkQualityCenters"
+            await myFetch(url, "PUT", {
+                id: containerMilkQualityCenter._id,
+                storedAtCenter: true,
+            })
         }
-
-
-        let data = await myFetch(url, "PUT", formData);
-        console.log(data);
-        
     }
-
-
-
-  
-        
+    
   const handleSubmit = async (e) => {
 
     e.preventDefault();
-
-    if (!selected) {
-
-        showAlert("Please select a product", "error")
-        return 
-
-    }
-
-
     setSubmitting(true);
 
     try {
-    let url = "/api/productQualities";
-    let productName = selected.split(",")[1]
-    let preProductQualityId = selected.split(",")[0]
-
+    let url = "/api/centerContainerQualities"
     let data = await myFetch(url, "POST", 
-    {   
-        "centerId": authUser._id, 
-        "productName": productName,
+    {
         "quality": quality,
         "quantity": quantity, 
-        "preProductQualityId": preProductQualityId,
+        "containerIds":containerIds,
+        "centerId": authUser._id,
     });
 
     console.log(data);
 
-    setQuality({}); setQuantity();
+    setQuality({}); setQuantity(null);
     setSubmittedDB(true);
     changeStatusToStored();
 
     // setSubmitting(false);
-    showAlert("Dada Stored Successfully")
+    showAlert("Cow Milk Dada Stored Successfully")
     }
     catch (e) { 
         console.log(e);
@@ -104,44 +69,56 @@ export default function ProductCheck() {
 }
 
 
+    
+
+    const getContainerIds = async () => {
+        let url = "/api/containerMilkQualityCenters?storedAtCenter=false&pageSize=1000";
+        let data = await myFetch(url);
+        let array = data.containerMilkQualityCenters;
+        setContainerMilkQualityCenters(array);
+        // console.log(array);
+        const containerIds = array.map(item => item.containerId);
+        // console.log(containerIds);
+        setContainerIds(containerIds);
+    }
+
+    React.useEffect(()=> {
+
+        if (authUser?.role==="center") {
+            getContainerIds();
+        }
+
+    }, [authUser])
 
 
 
-    if (!token) {
-
-        return <LoginRequired />
-     }
-
-
+    if (!token) { 
+        return (
+            <LoginRequired  />
+        )
+    }
+    
     return (
+
         <div className='bg-base-100 min-h-screen px-8 py-4'>
             
             <div className='card md:w-2/4 m-auto bg-base-200 p-4'>
 
-            {preProductQualities.length===0 &&
-            
-            <h2 className='text-xl'> All the data are stored already </h2>
-            }
-
-            
-
-            {(!submittedDB && preProductQualities.length>0) && <form className="mt-8" onSubmit={handleSubmit}>
-                  <div className="">
-
-
-                  <select onChange={(e)=> setSelected(e.target.value)} className="select mb-4  select-sm select-bordered">
-                <option selected disabled >Selecte Product Name: </option>
-
-                {preProductQualities.map((item, index)=> 
+                {containerIds.length === 0 && <div>
+                    <h1 className="text-xl text-error">
+                        No container found here. Either you have stored the data for all the containers or something went wrong
+                    </h1>
+                </div>
+                }
                 
-                <option value={item._id+","+item.productName}>{item.productName}</option>
-                )}
+                {containerIds.length>0 && <div>
+                <h1 className='text-xl'>{containerIds.length} found to store the data</h1>
+
+                <h1 className='text-xl'>Enter the Data</h1>
 
 
-            </select>
-            
-
-
+                {!submittedDB && <form className="mt-8" onSubmit={handleSubmit}>
+                  <div className="">
                     <label className="block mb-2 text-sm "> Quantity</label>
                     <input
                       type="number"
@@ -195,9 +172,9 @@ export default function ProductCheck() {
                 <span>The Data is Stored in the Database</span>
                 </div>}
 
-
+                </div>}
             </div>
-
+            
         </div>
     )
 }

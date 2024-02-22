@@ -38,10 +38,10 @@ const Navbar = () => {
         {token && 
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal flex items-center px-1">
-            <li>
+            {/* <li>
               <Link href="/dashboard">Dashboard</Link>
-            </li>
-            <div className="dropdown dropdown-hover">
+            </li> */}
+            {/* <div className="dropdown dropdown-hover">
               <div tabIndex={0} role="button" className="btn m-1">
                 Hover
               </div>
@@ -56,10 +56,10 @@ const Navbar = () => {
                   <a>Item 2</a>
                 </li>
               </ul>
-            </div>
-            <li>
+            </div> */}
+            {/* <li>
               <a>Item 3</a>
-            </li>
+            </li> */}
           </ul>
         </div>
 }

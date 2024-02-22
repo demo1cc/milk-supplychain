@@ -3,6 +3,8 @@ import { useData } from "@/context/DataContext";
 import { useAuth } from "@/context/AuthContext";
 import Loading from "./Loading";
 import { myFetch } from "@/utils/myFetch";
+import Link from "next/link";
+
 export default function FarmerContainers(){
 
     const {farmerContainerData} = useData();
@@ -14,6 +16,20 @@ export default function FarmerContainers(){
 
     const [loading, setLoading] = React.useState(true);
     const {authUser} = useAuth();
+
+    const [domain, setDomain] = React.useState("");
+
+    React.useEffect(() => {
+
+      const protocol = typeof window !== 'undefined' ? window.location.protocol : '';
+      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    
+      // Combine protocol and hostname to get the complete domain
+      const domain = protocol + '//' + hostname;
+      setDomain(domain);
+      console.log(domain);
+    },[])
+
 
     React.useEffect(()=> {
         if (farmerContainerData) {
@@ -56,12 +72,15 @@ export default function FarmerContainers(){
       <tr>
         <th>ID</th>
         <th>Max Capacity</th>
+        <th>QR code</th>
       </tr>
     </thead>
     <tbody>
       {farmerContainers.map((farmerContainer, index)=><tr key={index}>
       <td>{farmerContainer._id}</td>
         <td>{farmerContainer.maxCapacity}</td>
+        <td><Link href={"/generate-qr?url="+ domain+"/store-data/container/"+farmerContainer._id}>Generate QR</Link> </td>
+
       </tr>)}
     </tbody>
   </table>

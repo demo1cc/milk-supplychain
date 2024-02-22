@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { myFetch } from "@/utils/myFetch";
 import { showAlert } from "@/utils/showAlert";
+import { useData } from "@/context/DataContext";
 
 export default function AddContainerModal({modalName}){
 
@@ -11,6 +12,7 @@ export default function AddContainerModal({modalName}){
   const [submitting, setSubmitting] = React.useState(false); // New state for loading
 
     const {authUser} = useAuth();
+    const {fetchFarmerContainers} = useData();
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,7 +34,8 @@ export default function AddContainerModal({modalName}){
 
     // setSubmitting(false);
     document.getElementById(modalName).close();
-    showAlert("Container Added Successfully")
+    showAlert("Container Added Successfully");
+    fetchFarmerContainers();
     }
     catch (e) { 
         showAlert("Something went wrong", "error")

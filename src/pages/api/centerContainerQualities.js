@@ -25,13 +25,17 @@ export default async function handler(req, res) {
           const page = parseInt(req.query.page) || 1;
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
+
+          if (req.query.centerId) {
+            query.centerId = req.query.centerId;
+          }
+
   
           const totalCount = await CenterContainerQuality.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);
   
           const centerContainerQualitys = await CenterContainerQuality.find(query)
               .sort({ created: -1 })
-
               .skip((page - 1) * pageSize)
               // .populate(["centerId"])
               .limit(pageSize);

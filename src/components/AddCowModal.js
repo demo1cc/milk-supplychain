@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { myFetch } from "@/utils/myFetch";
 import { showAlert } from "@/utils/showAlert";
+import { useData } from "@/context/DataContext";
 
 export default function AddCowModal({modalName}){
 
@@ -10,6 +11,7 @@ export default function AddCowModal({modalName}){
   const [submitting, setSubmitting] = React.useState(false); // New state for loading
 
     const {authUser} = useAuth();
+    const {fetchFarmerCows} = useData();
 
     const handleChange = (e) => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +32,8 @@ export default function AddCowModal({modalName}){
     setFormData({});
     // setSubmitting(false);
     document.getElementById(modalName).close();
-    showAlert("Cow Added Added Successfully")
+    showAlert("Cow Added Added Successfully");
+    fetchFarmerCows();
     }
     catch (e) { 
         showAlert("Something went wrong", "error")

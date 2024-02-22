@@ -30,6 +30,12 @@ export default async function handler(req, res) {
             query.containerId = req.query.containerId;
           }
 
+        //   storedAtCenter
+
+          if (req.query.storedAtCenter) {
+            query.storedAtCenter = req.query.storedAtCenter;
+          }
+
   
           const totalCount = await ContainerMilkQualityCenter.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);

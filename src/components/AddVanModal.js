@@ -2,6 +2,7 @@ import React from "react";
 import { useAuth } from "@/context/AuthContext";
 import { myFetch } from "@/utils/myFetch";
 import { showAlert } from "@/utils/showAlert";
+import { useData } from "@/context/DataContext";
 
 export default function AddVanModal({modalName}){
 
@@ -11,6 +12,7 @@ export default function AddVanModal({modalName}){
   const [submitting, setSubmitting] = React.useState(false); // New state for loading
 
     const {authUser} = useAuth();
+    const { fetchCenterVans } = useData();
 
   const handleSubmit = async (e) => {
 
@@ -31,7 +33,8 @@ export default function AddVanModal({modalName}){
     setName(""); setVehicleNumber("")
     // setSubmitting(false);
     document.getElementById(modalName).close();
-    showAlert("Van Added Successfully")
+    showAlert("Van Added Successfully");
+    fetchCenterVans();
     }
     catch (e) { 
         showAlert("Something went wrong", "error")

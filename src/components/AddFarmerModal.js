@@ -2,6 +2,7 @@ import React from "react";
 import { myFetch } from "@/utils/myFetch";
 import { showAlert } from "@/utils/showAlert";
 import { useAuth } from "@/context/AuthContext";
+import { useData } from "@/context/DataContext";
 
 export default function AddFarmerModal({modalName}){
     const [name, setName] = React.useState(null);
@@ -12,6 +13,7 @@ export default function AddFarmerModal({modalName}){
     const [submitting, setSubmitting] = React.useState(false); // New state for loading
 
     const {authUser} = useAuth();
+    const {fetchCenterFarmers} = useData();
 
 
     const handleSubmit = async (e) => {
@@ -44,7 +46,8 @@ export default function AddFarmerModal({modalName}){
         setName(""); setEmail("");setMobile(""); setAddress({})
         // setSubmitting(false);
         document.getElementById(modalName).close();
-        showAlert("Farmer Added Successfully")
+        showAlert("Farmer Added Successfully");
+        fetchCenterFarmers();
         }
         catch (e) { 
             showAlert("Something went wrong", "error")

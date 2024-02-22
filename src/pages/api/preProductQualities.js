@@ -25,6 +25,16 @@ export default async function handler(req, res) {
           const page = parseInt(req.query.page) || 1;
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
+
+          if (req.query.centerId) {
+            query.centerId = req.query.centerId;
+          }
+
+
+          if (req.query.isProductChecked) {
+            query.isProductChecked = req.query.isProductChecked;
+          }
+          
   
           const totalCount = await PreProductQuality.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);

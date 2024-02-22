@@ -104,7 +104,7 @@ export default function StoreCowData () {
     }
     
     const submitAtCenter = async () => {
-        let url = "/api/containerMilkCenterQualities";
+        let url = "/api/containerMilkQualityCenters";
         let data = await myFetch(url, "POST", 
         {
                 "quality": quality,

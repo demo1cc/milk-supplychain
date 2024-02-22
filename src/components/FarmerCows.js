@@ -3,6 +3,10 @@ import { useData } from "@/context/DataContext";
 import { useAuth } from "@/context/AuthContext";
 import Loading from "./Loading";
 import { myFetch } from "@/utils/myFetch";
+import Link from "next/link";
+
+
+
 export default function FarmerCows(){
 
     const {farmerCowData} = useData();
@@ -15,6 +19,19 @@ export default function FarmerCows(){
     const [loading, setLoading] = React.useState(true);
     const {authUser} = useAuth();
 
+    const [domain, setDomain] = React.useState("");
+
+    React.useEffect(() => {
+
+      const protocol = typeof window !== 'undefined' ? window.location.protocol : '';
+      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    
+      // Combine protocol and hostname to get the complete domain
+      const domain = protocol + '//' + hostname;
+      setDomain(domain);
+      console.log(domain);
+    },[])
+
     React.useEffect(()=> {
         if (farmerCowData) {
           // console.log("this is if", ownerPenaltyData.ownerPenalties);
@@ -24,6 +41,8 @@ export default function FarmerCows(){
         }
       
     }, [farmerCowData])
+
+
 
 
 
@@ -50,6 +69,7 @@ export default function FarmerCows(){
 
     return (
 <div className="overflow-x-auto">
+
   <table className="table">
     {/* head */}
     <thead>
@@ -57,6 +77,7 @@ export default function FarmerCows(){
         <th>ID</th>
         <th>Breed</th>
         <th>Milking System</th>
+        <th>QR code</th>
       </tr>
     </thead>
     <tbody>
@@ -65,7 +86,9 @@ export default function FarmerCows(){
 
       <td>{farmerCow.breed}</td>
         <td>{farmerCow.milkingSystem}</td>
+        <td><Link href={"/generate-qr?url="+ domain+"/store-data/cow/"+farmerCow._id}>Generate QR</Link> </td>
       </tr>)}
+
     </tbody>
   </table>
 

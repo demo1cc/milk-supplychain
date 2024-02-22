@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 // connectDB();
 // Create a simple user schema
 const preProductQualitySchema = new mongoose.Schema({
+  centerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+
   centerContainerQualityId: {type: mongoose.Schema.Types.ObjectId, ref: 'CenterContainerQuality', required: true },
 
   productName : {type: String}, 
@@ -13,6 +15,7 @@ const preProductQualitySchema = new mongoose.Schema({
   
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },
+  isProductChecked : { type: Boolean, default: false}, 
 });
 
 const PreProductQuality = mongoose.models.PreProductQuality || mongoose.model('PreProductQuality', preProductQualitySchema);

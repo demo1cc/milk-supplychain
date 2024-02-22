@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
 // connectDB();
 // Create a simple user schema
 const productQualitySchema = new mongoose.Schema({
-  
+  centerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+
   preProductQualityId: {type: mongoose.Schema.Types.ObjectId, ref: 'PreProductQuality', required: true },
 
   productName : {type: String}, 

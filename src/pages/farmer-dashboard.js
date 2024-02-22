@@ -17,11 +17,11 @@ export default function FarmerDashBoard() {
     }
 
     return (
-        <div className="py-4 px-8 bg-base-100">
-            <div className="grid grid-cols-1 md:grid-cols-2 md:gap-4">
+        <div className="py-4 px-8 min-h-screen bg-base-100">
+            <div className="grid  grid-cols-1 md:grid-cols-2 md:gap-4">
             
                 <div className="card bg-base-200 p-4">
-                <button onClick={()=>document.getElementById('my_modal_1').showModal()} className="btn btn-outline btn-sm">
+                <button onClick={()=>document.getElementById('my_modal_1').showModal()} className="btn btn-outline btn-sm mb-4">
                     <IoMdAdd />
                     Cow
                 </button>
@@ -34,7 +34,7 @@ export default function FarmerDashBoard() {
                 </div>
 
                 <div className="card bg-base-200 p-4">
-                <button onClick={()=>document.getElementById('my_modal_2').showModal()} className="btn btn-outline btn-sm">
+                <button onClick={()=>document.getElementById('my_modal_2').showModal()} className="btn btn-outline btn-sm mb-4">
                     <IoMdAdd />
                     Container
                 </button>

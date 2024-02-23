@@ -134,7 +134,7 @@ export default function ProductCheck() {
 
                 {preProductQualities.map((item, index)=> 
                 
-                <option value={item._id+","+item.productName}>{item.productName}</option>
+                <option key={index} value={item._id+","+item.productName}>{item.productName}</option>
                 )}
 
 

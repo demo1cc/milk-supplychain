@@ -71,7 +71,6 @@ export default async function handler(req, res) {
           console.error(error);
           res.status(500).send('Internal Server Error');
         }
-        res.status(500).send('Provide a valid query');
         break;
       
       case 'PUT':

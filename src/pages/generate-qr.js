@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { QRCodeCanvas, QRCodeSVG } from 'qrcode.react';
 
-export default function generateQR() {
+export default function GenerateQR() {
     const router = useRouter();
 
     const { query } = router;

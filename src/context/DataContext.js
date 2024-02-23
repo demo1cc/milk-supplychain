@@ -13,19 +13,7 @@ export const DataProvider = ({ children }) => {
     const [farmerContainerData, setFarmerContainerData] = useState(null);
 
 
-    useEffect(() => {
-        // Fetch complaints when the component mounts
-        // In this example, fetching from an API
-        if (authUser?.role === "center"){
-            fetchCenterFarmers();
-            fetchCenterVans();
-        }
 
-        if (authUser?.role === "farmer"){
-            fetchFarmerCows();
-            fetchFarmerContainers();
-        }
-      }, [authUser]);
 
       const fetchFarmerCows = async (page) => {
         try {
@@ -72,6 +60,20 @@ export const DataProvider = ({ children }) => {
             console.error("Error fetching imposePenalties:", error);    
         }    
       }
+
+      useEffect(() => {
+        // Fetch complaints when the component mounts
+        // In this example, fetching from an API
+        if (authUser?.role === "center"){
+            fetchCenterFarmers();
+            fetchCenterVans();
+        }
+
+        if (authUser?.role === "farmer"){
+            fetchFarmerCows();
+            fetchFarmerContainers();
+        }
+      }, [authUser]);
 
     return (
         <DataContext.Provider value={{ fetchFarmerCows,  fetchFarmerContainers, fetchCenterVans, fetchCenterFarmers, centerFarmerData, centerVanData, farmerCowData, farmerContainerData }}>

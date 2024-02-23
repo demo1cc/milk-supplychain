@@ -5,7 +5,7 @@ import CowMilkQuality from '@/models/CowMilkQuality.mjs';
 // import User from '@/models/User';
 import Cow from '@/models/Cow.mjs';
 
-// connectDB();
+connectDB();
 
 
 export default async function handler(req, res) {

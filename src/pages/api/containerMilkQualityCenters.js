@@ -1,8 +1,8 @@
 // import mongoose from 'mongoose';
-// import connectDB from '@/utils/db';
+import connectDB from '@/utils/db';
 import ContainerMilkQualityCenter from '@/models/ContainerMilkQualityCenter';
 
-// connectDB();
+connectDB();
 
 
 export default async function handler(req, res) {

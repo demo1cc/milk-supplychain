@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import ContainerMilkQuality from '@/models/ContainerMilkQuality.mjs';
 
-// connectDB();
+connectDB();
 
 
 export default async function handler(req, res) {

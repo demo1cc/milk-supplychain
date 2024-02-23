@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import ProductQuality from '@/models/ProductQuality.mjs';
 
-// connectDB();
+connectDB();
 
 
 export default async function handler(req, res) {

@@ -3,7 +3,7 @@ import connectDB from '@/utils/db';
 import Cow from '@/models/Cow.mjs';
 
 
-// connectDB();
+connectDB();
 
 export default async function handler(req, res) {
 

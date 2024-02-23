@@ -8,7 +8,7 @@ import User from '@/models/User.mjs';
 var jwt = require('jsonwebtoken');
 
 
-// connectDB();
+connectDB();
 
 
 

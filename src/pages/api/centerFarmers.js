@@ -2,7 +2,7 @@
 import connectDB from '@/utils/db';
 import CenterFarmer from '@/models/CenterFarmer.mjs';
 
-// connectDB();
+connectDB();
 
 
 export default async function handler(req, res) {

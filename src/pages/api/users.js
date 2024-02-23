@@ -55,49 +55,39 @@ export default async function handler(req, res) {
       }
       break;
     case 'POST':
-
-      if (req.query.type=="create-user"){
-      try {
-        const newUser = new User(req.body);
-        const savedUser = await newUser.save();
-        res.status(201).json(savedUser);
-      } catch (error) {
-        console.error(error);
-        res.status(500).send('Internal Server Error');
-      }
-      } 
-
-      else if (req.query.type=="login"){
-        // console.log("login requested")
-
-        try {
-          const { mobile, password } = req.body;
-          // console.log(username, password);
-          const user = await User.findOne({ mobile });
-      
-          // console.log(user);
-      
-          if (!user) return res.status(401).json({ message: 'Invalid credentials' });
-      
-          const isPasswordValid = await user.comparePassword(password);
-      
-          if (!isPasswordValid) return res.status(401).json({ message: 'Invalid password' });
-      
-          const token = jwt.sign({ mobile: user.mobile, userId: user._id }, process.env.JWT_SECRET, {
-            expiresIn: '30d', // Token expires in 1 hour
-          });
-      
-          res.json({ token, user });
-        } catch (error) {
-          res.status(500).json({ error: error.message });
+        if (req.query.type === "create-user") {
+          try {
+            const newUser = new User(req.body);
+            const savedUser = await newUser.save();
+            res.status(201).json(savedUser);
+          } catch (error) {
+            console.error(error);
+            res.status(500).send('Internal Server Error');
+          }
+        } else if (req.query.type === "login") {
+          try {
+            const { mobile, password } = req.body;
+            const user = await User.findOne({ mobile });
+        
+            if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+        
+            const isPasswordValid = await user.comparePassword(password);
+        
+            if (!isPasswordValid) return res.status(401).json({ message: 'Invalid password' });
+        
+            const token = jwt.sign({ mobile: user.mobile, userId: user._id }, process.env.JWT_SECRET, {
+              expiresIn: '30d', // Token expires in 30 days
+            });
+        
+            res.json({ token, user });
+          } catch (error) {
+            res.status(500).json({ error: error.message });
+          }
+        } else {
+          res.status(500).send('Provide a valid query');
         }
-      }
-
-      res.status(500).send('Provide a valid query');
-
-
       break;
-    
+      
     case 'PUT':
         try {
           const { id, ...updatedData } = req.body;

@@ -4,7 +4,7 @@ import { PiUser } from "react-icons/pi";
 import { useAuth } from "@/context/AuthContext";
 
 const Navbar = () => {
-  const { token, logout } = useAuth();
+  const { token, logout, authUser } = useAuth();
   return (
     <div className="navbar bg-base-200">
       <div className="navbar-start">
@@ -28,12 +28,19 @@ const Navbar = () => {
         </div> */}
         {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
         <div className="text-xl">
-          <Link
+          {!token && <Link
             href={"/"}
             className="btn btn-ghost normal-case text-xl text-primary"
           >
             Milk-Supplychain
-          </Link>
+          </Link> }
+
+          {token && <Link
+            href={authUser?.role==="farmer"?"/farmer-dashboard":"/center-dashboard"}
+            className="btn btn-ghost normal-case text-xl text-primary"
+          >
+            Milk-Supplychain
+          </Link> }
         </div>
         {token && 
         <div className="navbar-center hidden lg:flex">

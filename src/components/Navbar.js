@@ -8,7 +8,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-200">
       <div className="navbar-start">
-        <div className="dropdown">
+        {/* <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +25,7 @@ const Navbar = () => {
               />
             </svg>
           </div>
-        </div>
+        </div> */}
         {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
         <div className="text-xl">
           <Link
@@ -79,11 +79,11 @@ const Navbar = () => {
               tabIndex={0}
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-44 absolute left-auto right-0"
             >
-              <li>
+              {/* <li>
                 <Link href="#" className="justify-between">
                   Profile
                 </Link>
-              </li>
+              </li> */}
               <li>
                 {token && (
                   <button className="justify-between" onClick={logout}>

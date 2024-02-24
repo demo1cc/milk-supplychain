@@ -79,7 +79,7 @@ export default function FarmerContainers(){
       {farmerContainers.map((farmerContainer, index)=><tr key={index}>
       <td>{farmerContainer._id}</td>
         <td>{farmerContainer.maxCapacity}</td>
-        <td><Link href={"/generate-qr?url="+ domain+"/store-data/container/"+farmerContainer._id}>Generate QR</Link> </td>
+        <td><a target="_blank" href={"https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+ domain+"/store-data/container/"+farmerContainer._id}>Generate QR</a> </td>
 
       </tr>)}
     </tbody>

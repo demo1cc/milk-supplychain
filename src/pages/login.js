@@ -7,6 +7,9 @@ export default function Login() {
   const { token, login, authUser } = useAuth();
   const router = useRouter();
 
+  const {next} = router.query;
+  // console.log(next);
+
   const [formData, setFormData] = useState({
     mobile: '',
     password: '',
@@ -28,11 +31,18 @@ export default function Login() {
 
   React.useEffect(() => {
     if (authUser) {
+
+
+      if (next){
+        router.push(next);
+      } else {
+      
       if (authUser?.role === "farmer") {
         router.push('/farmer-dashboard');
       } else {
         router.push('/center-dashboard');
       }
+    }
   }
   }, [authUser]);
 
@@ -92,7 +102,7 @@ export default function Login() {
             )}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">mobile</span>
+                <span className="label-text">Mobile</span>
               </label>
               <input
                 type="text"

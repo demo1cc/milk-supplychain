@@ -41,7 +41,7 @@ export const DataProvider = ({ children }) => {
       const fetchCenterFarmers = async () => {
         try {
           const data = await myFetch("/api/centerFarmers?centerId="+authUser?._id);
-          // console.log(data);
+          console.log(data);
           
             setCenterFarmerData(data);
         //   setLoading(false); // Set loading to false in case of an error

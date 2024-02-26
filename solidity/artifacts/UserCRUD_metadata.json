@@ -125,19 +125,6 @@
 						"type": "string"
 					}
 				],
-				"name": "deleteUser",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_id",
-						"type": "string"
-					}
-				],
 				"name": "getUserDetails",
 				"outputs": [
 					{
@@ -200,30 +187,6 @@
 				"name": "updateUserDetails",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "userAddresses",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -341,11 +304,11 @@
 	},
 	"sources": {
 		"users.sol": {
-			"keccak256": "0xb25f6952566c67ed4388f9edd13ffaf6f1af3691314786e1de187ff0ed1c31af",
+			"keccak256": "0x1e64e26bf69cc7abb5895f8a2cc63d5ef3008413ec315a23ba9c474854a8b5b0",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9c3e689420c7c211c53761c9bd816a7a81785869786ed1737d8325d9ac55eedd",
-				"dweb:/ipfs/QmfYur699o21W8nTNADfhoKWWZMpjwV57r2BNzgAPJXa7F"
+				"bzz-raw://a897c486ea4ac364094cd8297e5c93aecd02036e9f73bf2e6f55769c9d09457d",
+				"dweb:/ipfs/QmcprvbQE7hNKc5PgJCdZjjarcdWdT3E4hF3o29Dp9yDzE"
 			]
 		}
 	},

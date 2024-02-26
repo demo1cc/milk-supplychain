@@ -55,6 +55,14 @@ export default async function handler(req, res) {
       case 'POST':
         try {
           const newFarmerContainer = new FarmerContainer(req.body);
+          const lastFarmerContainer = await FarmerContainer.findOne({}, {}, { sort: { 'created': -1 } });
+
+        if (lastFarmerContainer?.containerNumber) {
+          newFarmerContainer.containerNumber = lastFarmerContainer.containerNumber+1
+        } else {
+          newFarmerContainer.containerNumber = 1 
+        }
+        
           const savedFarmerContainer = await newFarmerContainer.save();
           // await savedFarmerContainer.populate(['farmerId',])
   

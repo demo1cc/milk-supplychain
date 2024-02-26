@@ -100,21 +100,22 @@ export default function StoreDataCenter() {
     
     return (
 
-        <div className='bg-base-100 min-h-screen px-8 py-4'>
+        <div className='bg-base-100 min-h-screen px-4 md:px-8 py-4'>
             
             <div className='card md:w-2/4 m-auto bg-base-200 p-4'>
 
                 {containerIds.length === 0 && <div>
                     <h1 className="text-xl text-error">
-                        No container found here. Either you have stored the data for all the containers or something went wrong
+                        No container found here. Either you have stored the data for all containers or something went wrong
                     </h1>
                 </div>
                 }
                 
                 {containerIds.length>0 && <div>
-                <h1 className='text-xl'>{containerIds.length} found to store the data</h1>
 
                 <h1 className='text-xl'>Enter the Data</h1>
+                <h1 className='text opacity-60'>{containerIds.length} containers found</h1>
+
 
 
                 {!submittedDB && <form className="mt-8" onSubmit={handleSubmit}>
@@ -144,6 +145,36 @@ export default function StoreDataCenter() {
                       className="block w-full mt-2 input input-sm input-bordered"
                     />
                   </div>
+
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Fat</label>
+                    <input
+                      type="number"
+                      required
+                      name="fat"
+                      value={quality.fat}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Protein</label>
+                    <input
+                      type="number"
+                      required
+                      name="protein"
+                      value={quality.protein}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
 
                   <div className="mt-4">
                 

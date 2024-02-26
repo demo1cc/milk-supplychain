@@ -57,7 +57,20 @@ export default async function handler(req, res) {
     case 'POST':
       try {
         const newCow = new Cow(req.body);
+        
+
+        const lastCow = await Cow.findOne({}, {}, { sort: { 'created': -1 } });
+
+        if (lastCow?.cowNumber) {
+          newCow.cowNumber = lastCow.cowNumber+1
+        } else {
+          newCow.cowNumber = 1 
+        }
+
         const savedCow = await newCow.save();
+
+        
+
         // await savedCow.populate(['farmerId'])
 
         res.status(201).json(savedCow);

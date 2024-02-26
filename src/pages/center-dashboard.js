@@ -20,7 +20,7 @@ export default function CenterDashBoard() {
     }
 
     return (
-        <div className="bg-base-100 min-h-screen px-8 py-4">
+        <div className="bg-base-100 min-h-screen px-4 md:px-8 py-4">
 
 
             <div className="grid md:grid-cols-2 gap-4">

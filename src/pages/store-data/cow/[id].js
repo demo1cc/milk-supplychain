@@ -67,12 +67,12 @@ export default function StoreCowData () {
     }
 
     return (
-        <div className='bg-base-100 min-h-screen px-8 py-4'>
+        <div className='bg-base-100 min-h-screen px-4 md:px-8 py-4'>
             
             <div className='card md:w-2/4 m-auto bg-base-200 p-4'>
                 <h1 className='text-xl'>Enter the Data</h1>
 
-                {!submittedDB && <form className="mt-8" onSubmit={handleSubmit}>
+                {!submittedDB && <form className="mt-4" onSubmit={handleSubmit}>
                   <div className="">
                     <label className="block mb-2 text-sm "> Quantity</label>
                     <input
@@ -87,12 +87,40 @@ export default function StoreCowData () {
                   </div>
 
                   <div className=" mt-4">
-                    <label className="block mb-2 text-sm">temperature</label>
+                    <label className="block mb-2 text-sm">Temperature</label>
                     <input
                       type="number"
                       required
                       name="temperature"
                       value={quality.temperature}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Fat</label>
+                    <input
+                      type="number"
+                      required
+                      name="fat"
+                      value={quality.fat}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Protein</label>
+                    <input
+                      type="number"
+                      required
+                      name="protein"
+                      value={quality.protein}
                       onChange={handleChange}
 
                       placeholder=""
@@ -116,15 +144,14 @@ export default function StoreCowData () {
 
                 }
 
-
                 {submittedDB && <div role="alert" className="alert mt-4 alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>The Data is Stored in the Database</span>
+                <span>The data is stored in the database</span>
                 </div>}
 
                 {submittedBlockChain && <div role="alert" className="alert mt-4 alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>The Data is Stored in the Database</span>
+                <span>The data is stored in the blockchain</span>
                 </div>}
             </div>
             

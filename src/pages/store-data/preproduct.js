@@ -14,7 +14,7 @@ export default function PreProduct() {
     const [submittedBlockChain, setSubmittedBlockChain] = React.useState(false);
     const [submitting, setSubmitting] = React.useState(false);
     const [quality, setQuality] = React.useState({});
-    const [quantity, setQuantity] = React.useState(null);
+    const [quantity, setQuantity] = React.useState("");
     const [checkAllDone, setCheckAllDone] = React.useState(false);
 
 
@@ -129,19 +129,21 @@ export default function PreProduct() {
 
 
     return(
-        <div className='bg-base-100 min-h-screen px-8 py-4'>
+        <div className='bg-base-100 min-h-screen px-4 md:px-8 py-4'>
             
             <div className='card md:w-2/4 m-auto bg-base-200 p-4'>
 
 
             {checkAllDone && <div>
-                <h1 className='text-xl'> All the data stored already</h1>
+                <h1 className='text-xl text-error'> All the data stored already for all the products</h1>
             </div>    
             }
             
 
-            {(!submittedDB && !checkAllDone) && <form className="mt-8" onSubmit={handleSubmit}>
+            {(!submittedDB && !checkAllDone) && <form className="mt-4" onSubmit={handleSubmit}>
                   <div className="">
+
+                    <h1 className='text-xl mb-4'>Enter the data for pre products</h1>
 
 
                   <select onChange={(e)=> setSelectedProduct(e.target.value)} className="select mb-4  select-sm select-bordered">
@@ -169,7 +171,7 @@ export default function PreProduct() {
                   </div>
 
                   <div className=" mt-4">
-                    <label className="block mb-2 text-sm">temperature</label>
+                    <label className="block mb-2 text-sm">Temperature</label>
                     <input
                       type="number"
                       required
@@ -181,6 +183,35 @@ export default function PreProduct() {
                       className="block w-full mt-2 input input-sm input-bordered"
                     />
                   </div>
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Fat</label>
+                    <input
+                      type="number"
+                      required
+                      name="fat"
+                      value={quality.fat}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Protein</label>
+                    <input
+                      type="number"
+                      required
+                      name="protein"
+                      value={quality.protein}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
 
                   <div className="mt-4">
                 

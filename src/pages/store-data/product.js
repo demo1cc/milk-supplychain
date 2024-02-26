@@ -114,19 +114,20 @@ export default function ProductCheck() {
 
 
     return (
-        <div className='bg-base-100 min-h-screen px-8 py-4'>
+        <div className='bg-base-100 min-h-screen px-4 md:px-8 py-4'>
             
             <div className='card md:w-2/4 m-auto bg-base-200 p-4'>
 
             {preProductQualities.length===0 &&
-            
-            <h2 className='text-xl'> All the data are stored already </h2>
+                <h1 className='text-xl text-error'> All the data stored already for all the products</h1>
             }
 
             
 
-            {(!submittedDB && preProductQualities.length>0) && <form className="mt-8" onSubmit={handleSubmit}>
+            {(!submittedDB && preProductQualities.length>0) && <form className="mt-4" onSubmit={handleSubmit}>
                   <div className="">
+
+                  <h1 className='text-xl mb-4'>Enter the data for products</h1>
 
 
                   <select onChange={(e)=> setSelected(e.target.value)} className="select mb-4  select-sm select-bordered">
@@ -155,7 +156,7 @@ export default function ProductCheck() {
                   </div>
 
                   <div className=" mt-4">
-                    <label className="block mb-2 text-sm">temperature</label>
+                    <label className="block mb-2 text-sm">Temperature</label>
                     <input
                       type="number"
                       required
@@ -167,6 +168,36 @@ export default function ProductCheck() {
                       className="block w-full mt-2 input input-sm input-bordered"
                     />
                   </div>
+
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Fat</label>
+                    <input
+                      type="number"
+                      required
+                      name="fat"
+                      value={quality.fat}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Protein</label>
+                    <input
+                      type="number"
+                      required
+                      name="protein"
+                      value={quality.protein}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
 
                   <div className="mt-4">
                 

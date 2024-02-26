@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 // Create a simple user schema
 const farmerContainerSchema = new mongoose.Schema({
   farmerId: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
-
+  containerNumber: {type: Number},
   maxCapacity: { type: Number,}, 
   created: { type: Date, default: Date.now },
   updated: { type: Date, default: Date.now },

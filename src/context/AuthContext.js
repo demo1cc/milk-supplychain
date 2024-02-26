@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(null);
   const [authUser, setAuthUser] = useState(null);
   const router = useRouter();
+  const [loginCheck, setLoginCheck] = useState(false);
 
   useEffect(() => {
     // Check if the authentication token exists in the cookie
@@ -25,6 +26,9 @@ export const AuthProvider = ({ children }) => {
       // console.log(storedToken, storedAuthUser)
       setToken(storedToken);
       setAuthUser(JSON.parse(storedAuthUser));
+      setLoginCheck(true);
+    } else {
+      setLoginCheck(true);
     }
 
   }, []); // Empty dependency array ensures this effect runs only once on mount
@@ -49,7 +53,7 @@ export const AuthProvider = ({ children }) => {
 
 
   return (
-    <AuthContext.Provider value={{ token, authUser, login, logout }}>
+    <AuthContext.Provider value={{loginCheck,  token, authUser, login, logout }}>
       {children}
     </AuthContext.Provider>
   );

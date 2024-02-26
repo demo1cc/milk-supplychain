@@ -32,14 +32,14 @@ const Navbar = () => {
             href={"/"}
             className="btn btn-ghost normal-case text-xl text-primary"
           >
-            Milk-Supplychain
+            Milk-SC
           </Link> }
 
           {token && <Link
             href={authUser?.role==="farmer"?"/farmer-dashboard":"/center-dashboard"}
             className="btn btn-ghost normal-case text-xl text-primary"
           >
-            Milk-Supplychain
+            Milk-SC
           </Link> }
         </div>
         {token && 

@@ -62,9 +62,9 @@ export default function CenterFarmers(){
     </thead>
     <tbody>
       {centerFarmers.map((centerFarmer, index)=><tr key={index}>
-      <td>{centerFarmer.farmerId.name}</td>
-        <td>{centerFarmer.farmerId.email}</td>
-        <td>{centerFarmer.farmerId.mobile}</td>
+      <td>{centerFarmer.farmerId?.name}</td>
+        <td>{centerFarmer.farmerId?.email}</td>
+        <td>{centerFarmer.farmerId?.mobile}</td>
       </tr>)}
     </tbody>
   </table>

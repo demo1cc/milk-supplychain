@@ -29,7 +29,7 @@ export default function FarmerCows(){
       // Combine protocol and hostname to get the complete domain
       const domain = protocol + '//' + hostname;
       setDomain(domain);
-      console.log(domain);
+      // console.log(domain);
     },[])
 
     React.useEffect(()=> {
@@ -74,7 +74,7 @@ export default function FarmerCows(){
     {/* head */}
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Cow Number</th>
         <th>Breed</th>
         <th>Milking System</th>
         <th>QR code</th>
@@ -82,7 +82,7 @@ export default function FarmerCows(){
     </thead>
     <tbody>
       {farmerCows.map((farmerCow, index)=><tr key={index}>
-      <td>{farmerCow._id}</td>
+      <td>{farmerCow.cowNumber}</td>
 
       <td>{farmerCow.breed}</td>
         <td>{farmerCow.milkingSystem}</td>

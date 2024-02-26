@@ -29,7 +29,7 @@ export default function AddCowModal({modalName}){
 
     // console.log(data);
 
-    setFormData({});
+    // setFormData({});
     // setSubmitting(false);
     document.getElementById(modalName).close();
     showAlert("Cow Added Added Successfully");
@@ -67,7 +67,7 @@ export default function AddCowModal({modalName}){
                       type="text"
                       required
                       name="breed"
-                      value={formData.breed}
+                      value={formData?.breed}
                       onChange={handleChange}
 
                       placeholder=""
@@ -76,12 +76,12 @@ export default function AddCowModal({modalName}){
                   </div>
 
                   <div className=" mt-4">
-                    <label className="block mb-2 text-sm">milkingSystem</label>
+                    <label className="block mb-2 text-sm">Milking System</label>
                     <input
                       type="text"
                       required
                       name="milkingSystem"
-                      value={formData.milkingSystem}
+                      value={formData?.milkingSystem}
                       onChange={handleChange}
 
                       placeholder=""

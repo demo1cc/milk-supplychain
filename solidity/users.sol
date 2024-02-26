@@ -26,7 +26,7 @@ contract UserCRUD {
     }
 
     // Mapping to associate Ethereum addresses with user IDs
-    mapping(address => string[]) public userAddresses;
+    // mapping(address => string[]) public userAddresses;
 
     // Mapping to store user data by their unique user ID
     mapping(string => User) public users;
@@ -48,10 +48,11 @@ contract UserCRUD {
         string memory _state,
         string memory _pin
     ) public {
+
         address newUserAddress = msg.sender;
 
         // Add user ID to the mapping for the Ethereum address
-        userAddresses[newUserAddress].push(_id);
+        // userAddresses[newUserAddress].push(_id);
 
         User storage newUser = users[_id];
 
@@ -83,24 +84,5 @@ contract UserCRUD {
         currentUser.mobile = _mobile;
         currentUser.email = _email;
         currentUser.updated = block.timestamp;
-    }
-
-    // Function to delete user by user ID
-    function deleteUser(string memory _id) public {
-        // Retrieve the Ethereum address associated with the user ID
-        address userAddress = msg.sender;
-        
-        // Remove the user ID from the mapping for the Ethereum address
-        string[] storage userIDs = userAddresses[userAddress];
-        for (uint256 i = 0; i < userIDs.length; i++) {
-            if (keccak256(abi.encodePacked(userIDs[i])) == keccak256(abi.encodePacked(_id))) {
-                userIDs[i] = userIDs[userIDs.length - 1];
-                userIDs.pop();
-                break;
-            }
-        }
-
-        // Delete the user data
-        delete users[_id];
     }
 }

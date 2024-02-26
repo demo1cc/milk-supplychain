@@ -207,7 +207,7 @@ export default function StoreCowData () {
                 {authUser?.role==="center" && 
                 <div className='mb-4'> 
                 {containerMilkQuality && <div>
-                    <h2 className='text-xl'>Farmer's data found for this container</h2>
+                    <h2 className='text-xl'>{`Farmer's data found for this container`}</h2>
                     <p>Quantity: {containerMilkQuality?.quantity} lt</p>
                     <p>Quality Parameters: {JSON.stringify(containerMilkQuality?.quality)}</p>
                 </div>}

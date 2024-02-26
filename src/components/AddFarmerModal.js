@@ -4,6 +4,9 @@ import { showAlert } from "@/utils/showAlert";
 import { useAuth } from "@/context/AuthContext";
 import { useData } from "@/context/DataContext";
 
+// import Web3 from 'web3';
+// import userABI from "@/contracts/User";
+
 export default function AddFarmerModal({modalName}){
     const [name, setName] = React.useState(null);
     const [mobile, setMobile] = React.useState(null);
@@ -14,6 +17,28 @@ export default function AddFarmerModal({modalName}){
 
     const {authUser} = useAuth();
     const {fetchCenterFarmers} = useData();
+    // const [contract, setContract] = React.useState(null); // Initialize contract as null initially
+
+
+    // const contractAddress = "0xFdBa54fa4120F42EDDE69A382Dd851f14AF0d71e";
+    
+
+    // React.useEffect(() => {
+    //   const initContract = async () => {
+    //     try {
+    //       const web3 = new Web3("https://rpc2.sepolia.org");
+    //       const contract = new web3.eth.Contract(userABI, contractAddress);
+    //       setContract(contract);
+    //       // console.log(contract);
+    //     } catch (error) {
+    //       console.error("Error initializing contract:", error);
+    //     }
+    //   };
+  
+    //   initContract();
+    // }, []);
+
+
 
 
     const handleSubmit = async (e) => {
@@ -30,6 +55,9 @@ export default function AddFarmerModal({modalName}){
             "mobile": mobile,
             address: address
         });
+
+
+        // saveToBlockchain();
 
         let url2 = "/api/centerFarmers"
 
@@ -48,6 +76,8 @@ export default function AddFarmerModal({modalName}){
         document.getElementById(modalName).close();
         showAlert("Farmer Added Successfully");
         fetchCenterFarmers();
+
+
         }
         catch (e) { 
             showAlert("Something went wrong", "error")

@@ -7,7 +7,9 @@ import initialSetup from './initialSetup.mjs';
 const nextConfig = {
   reactStrictMode: true,
   env: {
-    MONGODB_URI: process.env.MONGODB_URI
+    MONGODB_URI: process.env.MONGODB_URI,
+    PUBLIC_KEY: process.env.PUBLIC_KEY,
+    PRIVATE_KEY: process.env.PRIVATE_KEY,
   },
   webpack: (config, { isServer }) => {
     if (isServer) {

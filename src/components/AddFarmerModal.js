@@ -71,7 +71,8 @@ export default function AddFarmerModal({modalName}){
         // console.log(centerFarmerData);
 
 
-        setName(""); setEmail("");setMobile(""); setAddress({})
+        setName(""); setEmail("");setMobile("");
+        //  setAddress({})
         // setSubmitting(false);
         document.getElementById(modalName).close();
         showAlert("Farmer Added Successfully");

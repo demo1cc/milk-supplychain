@@ -32,17 +32,25 @@ export default function StoreCowData () {
             // console.log("fsdfasdfad")
             fetchContainerMilkQuality();
 
+        } else {
+            setDataLoaded(true);
         }
     },[authUser, id]);
 
     const fetchContainerMilkQuality = async () => {
+        // console.log("fetchContainerMilkQuality");
+        try {
         let url = "/api/containerMilkQualities?checkedAtCenter=false&containerId="+ id;
         let data = await myFetch(url); 
         console.log("container data", data);
-        setDataLoaded(true);
 
         if (data.containerMilkQualitys.length>0){
             setContainterMilkQuality(data.containerMilkQualitys[0]);
+        }
+        } catch (e) { 
+
+        } finally { 
+            setDataLoaded(true);
         }
 
     }

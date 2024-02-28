@@ -29,8 +29,8 @@ export default function AddContainerModal({modalName}){
 
     let data = await myFetch(url, "POST", formData);
 
-    console.log(data);
-    setFormData({})
+    // console.log(data);
+    // setFormData({})
 
     // setSubmitting(false);
     document.getElementById(modalName).close();

@@ -1,6 +1,7 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
 import ContainerMilkQuality from '@/models/ContainerMilkQuality.mjs';
+import FarmerContainer from '@/models/FarmerContainer.mjs';
 
 connectDB();
 

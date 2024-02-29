@@ -21,6 +21,7 @@ export default function StoreCowData () {
     const [cowMilkQualityIds, setCowMilkQualityIds] = React.useState(null);
     const [dataLoaded, setDataLoaded] = React.useState(false);
     const [containerMilkQuality, setContainterMilkQuality] = React.useState(null);
+    const [approved, setApproved] = React.useState(false);
 
 
 
@@ -160,6 +161,7 @@ export default function StoreCowData () {
         {
             "id":containerMilkQuality._id,
             "checkedAtCenter": true,
+            "approved": approved
         });
         console.log(data2);
 
@@ -292,6 +294,22 @@ export default function StoreCowData () {
                       className="block w-full mt-2 input input-sm input-bordered"
                     />
                   </div>
+
+                  {authUser?.role==="center" && 
+                  
+                  <div className="mt-4">
+                    <label className='cursor-pointer label'>
+                    Approved ?
+                    <input
+                        type="checkbox"
+                        className="toggle toggle-primary" 
+                        name="approved"
+                        checked={approved}
+                        onChange={(e)=> setApproved(e.target.checked)}
+                    />
+                    </label>
+                </div>
+                  }
 
                   <div className="mt-4">
                 

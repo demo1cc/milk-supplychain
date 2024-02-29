@@ -13,6 +13,8 @@ const containerMilkQualitySchema = new mongoose.Schema({
 
   checkedAtCenter: {type: Boolean, default: false },
 
+  approved: {type: Boolean, default: false}, 
+
   quantity: { type: Number},
   quality: { type: Object }, 
   

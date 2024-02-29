@@ -1,6 +1,10 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
-import CenterContainerQuality from '@/models/CenterContainerQuality.mjs';
+// import VanQuality from '@/models/VanQuality.mjs';
+
+// import User from '@/models/User';
+// import Cow from '@/models/Cow.mjs';
+import VanQuality from '@/models/VanQuality.mjs';
 
 connectDB();
 
@@ -11,12 +15,12 @@ export default async function handler(req, res) {
       case 'GET':
         if (req.query.id){
           try {
-            const centerContainerQuality = await CenterContainerQuality.findById(req.query.id);
-            // await centerContainerQuality.populate(['centerId'])
-            res.status(200).json(centerContainerQuality);
+            const vanQuality = await VanQuality.findById(req.query.id);
+            // await vanQuality.populate(['cowId'])
+            res.status(200).json(vanQuality);
           } catch (error) {
             // console.error(error);
-            res.status(404).send('CenterContainerQuality not found');
+            res.status(404).send('VanQuality not found');
           }
   
         } else {
@@ -26,30 +30,24 @@ export default async function handler(req, res) {
           const pageSize = parseInt(req.query.pageSize) || 10;
           let query = {}; 
 
-          if (req.query.centerId) {
-            query.centerId = req.query.centerId;
-          }
-
-          if (req.query.created) {
-            const yourDate = new Date(req.query.created);
-            query.created = {
-              $gte: yourDate,
-              $lt: new Date(yourDate.getTime() + 24 * 60 * 60 * 1000)
-            };
+          if (req.query.vanId) {
+            // Add a regex search for the nested memberId.name field
+            query.vanId = req.query.vanId;
           }
 
   
-          const totalCount = await CenterContainerQuality.countDocuments(query);
+          const totalCount = await VanQuality.countDocuments(query);
           const totalPages = Math.ceil(totalCount / pageSize);
   
-          const centerContainerQualitys = await CenterContainerQuality.find(query)
-              .sort({ created: -1 })
+          const vanQualitys = await VanQuality.find(query)
+            .sort({ created: -1 })
+
               .skip((page - 1) * pageSize)
-              // .populate(["centerId"])
+              // .populate(["cowId"])
               .limit(pageSize);
   
               res.json({
-              centerContainerQualitys,
+              vanQualitys,
               page,
               pageSize,
               totalCount,
@@ -64,11 +62,11 @@ export default async function handler(req, res) {
         break;
       case 'POST':
         try {
-          const newCenterContainerQuality = new CenterContainerQuality(req.body);
-          const savedCenterContainerQuality = await newCenterContainerQuality.save();
-          // await savedCenterContainerQuality.populate(['centerId',])
+          const newVanQuality = new VanQuality(req.body);
+          const savedVanQuality = await newVanQuality.save();
+          // await savedVanQuality.populate(['cowId',])
   
-          res.status(201).json(savedCenterContainerQuality);
+          res.status(201).json(savedVanQuality);
         } catch (error) {
           console.error(error);
           res.status(500).send('Internal Server Error');
@@ -78,9 +76,9 @@ export default async function handler(req, res) {
       case 'PUT':
           try {
             const { id, ...updatedData } = req.body;
-            const updatedCenterContainerQuality = await CenterContainerQuality.findByIdAndUpdate(id, updatedData, { new: true });
-            // await updatedCenterContainerQuality.populate(['centerId',])
-            res.status(200).json(updatedCenterContainerQuality);
+            const updatedVanQuality = await VanQuality.findByIdAndUpdate(id, updatedData, { new: true });
+            // await updatedVanQuality.populate(['cowId',])
+            res.status(200).json(updatedVanQuality);
           } catch (error) {
             console.error(error);
             res.status(500).send('Internal Server Error');
@@ -90,11 +88,11 @@ export default async function handler(req, res) {
       case 'DELETE':
         try {
           const { id } = req.body;
-          let deletedCenterContainerQuality = await User.findByIdAndDelete(id);
-          // console.log("sdnfkandjka", deletedCenterContainerQuality)
+          let deletedVanQuality = await User.findByIdAndDelete(id);
+          // console.log("sdnfkandjka", deletedVanQuality)
           res.status(200).send({
             "message":"deleted successfully",
-            deletedCenterContainerQuality
+            deletedVanQuality
           });
         } catch (error) {
           console.error(error);

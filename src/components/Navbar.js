@@ -91,11 +91,36 @@ const Navbar = () => {
                   Profile
                 </Link>
               </li> */}
+
+              {token && <li>
+
+                <Link
+                  href={authUser?.role==="farmer"?"/farmer-dashboard":"/center-dashboard"}
+                >
+                <button className="justify-between">
+                          Dashboard
+                        </button>
+                </Link>      
+              </li>
+                }
+
+
+
+              {(token && authUser.role==="center") && <li>
+                  <Link href={"/reports"}>
+                  <button className="justify-between">
+                    Reports
+                  </button>
+                  </Link>
+              </li>
+                }
+
               <li>
                 {token && (
                   <button className="justify-between" onClick={logout}>
                     Logout
                   </button>
+
                 )}
                 {!token && (
                   <Link href={"/login"}>
@@ -103,6 +128,8 @@ const Navbar = () => {
                   </Link>
                 )}
               </li>
+
+             
             </ul>
           </div>
         </div>

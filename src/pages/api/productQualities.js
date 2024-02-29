@@ -29,6 +29,14 @@ export default async function handler(req, res) {
           if (req.query.centerId) {
             query.centerId = req.query.centerId;
           }
+
+          if (req.query.created) {
+            const yourDate = new Date(req.query.created);
+            query.created = {
+              $gte: yourDate,
+              $lt: new Date(yourDate.getTime() + 24 * 60 * 60 * 1000)
+            };
+          }
           
   
           const totalCount = await ProductQuality.countDocuments(query);

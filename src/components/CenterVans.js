@@ -15,6 +15,20 @@ export default function CenterVans(){
     const [loading, setLoading] = React.useState(true);
     const {authUser} = useAuth();
 
+    const [domain, setDomain] = React.useState("");
+
+    React.useEffect(() => {
+
+      const protocol = typeof window !== 'undefined' ? window.location.protocol : '';
+      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    
+      // Combine protocol and hostname to get the complete domain
+      const domain = protocol + '//' + hostname;
+      setDomain(domain);
+      // console.log(domain);
+    },[])
+
+
     React.useEffect(()=> {
         if (centerVanData) {
           // console.log("this is if", ownerPenaltyData.ownerPenalties);
@@ -56,12 +70,19 @@ export default function CenterVans(){
       <tr>
         <th>Name</th>
         <th>Vehicle Number</th>
+        <th>QR code</th>
       </tr>
     </thead>
     <tbody>
       {centerVans.map((centerVan, index)=><tr key={index}>
-      <td>{centerVan.name}</td>
+        <td>{centerVan.name}</td>
         <td>{centerVan.vehicleNumber}</td>
+        <td>
+
+        <a target="_blank" href={"https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+ domain+"/store-data/van/"+centerVan._id}>Generate QR
+          </a>
+
+        </td>
       </tr>)}
     </tbody>
   </table>

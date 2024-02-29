@@ -81,7 +81,7 @@ export default async function handler(req, res) {
       case 'DELETE':
         try {
           const { id } = req.body;
-          let deletedCenterFarmer = await User.findByIdAndDelete(id);
+          let deletedCenterFarmer = await CenterFarmer.findByIdAndDelete(id);
           // console.log("sdnfkandjka", deletedCenterFarmer)
           res.status(200).send({
             "message":"deleted successfully",

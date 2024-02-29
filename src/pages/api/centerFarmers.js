@@ -1,6 +1,7 @@
 // import mongoose from 'mongoose';
 import connectDB from '@/utils/db';
 import CenterFarmer from '@/models/CenterFarmer.mjs';
+import User from '@/models/User.mjs';
 
 connectDB();
 

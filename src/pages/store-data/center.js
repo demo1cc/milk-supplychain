@@ -105,7 +105,7 @@ export default function StoreDataCenter() {
             <div className='card md:w-2/4 m-auto bg-base-200 p-4'>
 
                 {containerIds.length === 0 && <div>
-                    <h1 className="text-xl text-error">
+                    <h1 className="text-xl text-info">
                         No container found here. Either you have stored the data for all containers or something went wrong
                     </h1>
                 </div>

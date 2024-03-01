@@ -61,6 +61,7 @@ export default function PreProduct() {
         let data = await myFetch(url, "PUT", formData);
         console.log(data);
         setContainterMilkQuality(data);
+        setSelectedProduct("");
         
     }
     
@@ -68,7 +69,10 @@ export default function PreProduct() {
 
     e.preventDefault();
 
+    console.log( "selected", selectedProduct);
+
     if (!selectedProduct) {
+
 
         showAlert("Please select a product", "error")
         return 
@@ -90,12 +94,15 @@ export default function PreProduct() {
 
     console.log(data);
 
-    setQuality({}); setQuantity();
+    setQuality({
+      temperature: "",
+      fat:"",
+      protein:""
+    }); setQuantity("");
     setSubmittedDB(true);
     changeStatusToStored();
-
     // setSubmitting(false);
-    showAlert("Dada Stored Successfully")
+    showAlert("Data Stored Successfully")
     }
     catch (e) { 
         console.log(e);
@@ -135,19 +142,24 @@ export default function PreProduct() {
 
 
             {checkAllDone && <div>
-                <h1 className='text-xl text-error'> All the data stored already for all the products</h1>
+                <h1 className='text-xl text-info'> All the data stored for all the products</h1>
             </div>    
             }
+
+            {/* {submittedDB && <div role="alert" className="alert mt-4 alert-success">
+                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                <span>The Data is stored in the database</span>
+            </div>} */}
             
 
-            {(!submittedDB && !checkAllDone) && <form className="mt-4" onSubmit={handleSubmit}>
+            {(!checkAllDone) && <form className="mt-4" onSubmit={handleSubmit}>
                   <div className="">
 
                     <h1 className='text-xl mb-4'>Enter the data for pre products</h1>
 
 
-                  <select onChange={(e)=> setSelectedProduct(e.target.value)} className="select mb-4  select-sm select-bordered">
-                <option selected disabled >Selecte Product Name: </option>
+            <select value={selectedProduct} onChange={(e)=> setSelectedProduct(e.target.value)} className="select mb-4  select-sm select-bordered">
+                <option selected disabled value={""}>Selecte Product Name: </option>
 
                 {!centerContainerQuality?.isMilkStored && <option value={"milk"}>Milk</option>}
                {!centerContainerQuality?.isPaneerStored && <option value={"paneer"}>Paneer</option> }
@@ -156,8 +168,6 @@ export default function PreProduct() {
                 {!centerContainerQuality?.isGheeStored && <option value={"ghee"}>Ghee</option> }
             </select>
             
-
-
                     <label className="block mb-2 text-sm "> Quantity</label>
                     <input
                       type="number"
@@ -230,10 +240,7 @@ export default function PreProduct() {
                 }
 
 
-                {submittedDB && <div role="alert" className="alert mt-4 alert-success">
-                <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                <span>The Data is Stored in the Database</span>
-                </div>}
+
 
                 {submittedBlockChain && <div role="alert" className="alert mt-4 alert-success">
                 <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>

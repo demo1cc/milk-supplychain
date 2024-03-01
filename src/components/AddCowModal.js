@@ -89,6 +89,20 @@ export default function AddCowModal({modalName}){
                     />
                   </div>
 
+                  <div className=" mt-4">
+                    <label className="block mb-2 text-sm">Age</label>
+                    <input
+                      type="number"
+                      required
+                      name="age"
+                      value={formData?.age}
+                      onChange={handleChange}
+
+                      placeholder=""
+                      className="block w-full mt-2 input input-sm input-bordered"
+                    />
+                  </div>
+
                  
 
                   <div className="mt-4">

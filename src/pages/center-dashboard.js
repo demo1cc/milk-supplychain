@@ -25,7 +25,7 @@ export default function CenterDashBoard() {
 
 
             <Link href={"/store-data/center"}> <button className="btn btn-sm mb-4 mr-2">Store data at center</button> </Link>
-            <Link href={"/store-data/preproduct"}> <button className="btn btn-sm mb-4 mr-2">Store data for Pre Product</button> </Link>
+            <Link href={"/store-data/preproduct"}> <button className="btn btn-sm mb-4 mr-2">Store data for pre product</button> </Link>
             <Link href={"/store-data/product"}> <button className="btn btn-sm mb-4 mr-2">Store data for product</button> </Link>
 
             <div className="grid md:grid-cols-2 gap-4">

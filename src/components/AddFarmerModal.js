@@ -17,27 +17,29 @@ export default function AddFarmerModal({modalName}){
 
     const {authUser} = useAuth();
     const {fetchCenterFarmers} = useData();
-    // const [contract, setContract] = React.useState(null); // Initialize contract as null initially
 
-
-    // const contractAddress = "0xFdBa54fa4120F42EDDE69A382Dd851f14AF0d71e";
-    
-
-    // React.useEffect(() => {
-    //   const initContract = async () => {
-    //     try {
-    //       const web3 = new Web3("https://rpc2.sepolia.org");
-    //       const contract = new web3.eth.Contract(userABI, contractAddress);
-    //       setContract(contract);
-    //       // console.log(contract);
-    //     } catch (error) {
-    //       console.error("Error initializing contract:", error);
-    //     }
-    //   };
+    const [storedDb, setStoredDb] = React.useState(false);
+    const [storedBC, setStoredBC] = React.useState(false);
+    const [bcURL, setBCURL] = React.useState("");
   
-    //   initContract();
-    // }, []);
 
+    const saveToBlockchain = async (user) => {
+      let url = "/api/contract/users";
+
+      let data = await myFetch(url, "POST", 
+        {
+          "_id": user?._id,
+          "name": user?.name,
+          "role": user?.role,
+          "mobile": user?.mobile,
+          "password": user?.password,
+          "email": user?.email
+        });
+
+      console.log(data);
+      setStoredBC(true);
+      setBCURL(data.url);
+    }
 
 
 
@@ -57,7 +59,7 @@ export default function AddFarmerModal({modalName}){
         });
 
 
-        // saveToBlockchain();
+        saveToBlockchain(farmerData);
 
         let url2 = "/api/centerFarmers"
 
@@ -72,14 +74,16 @@ export default function AddFarmerModal({modalName}){
 
 
         setName(""); setEmail("");setMobile("");
+
+        setStoredDb(true);
         //  setAddress({})
         // setSubmitting(false);
-        document.getElementById(modalName).close();
+        // document.getElementById(modalName).close();
         showAlert("Farmer Added Successfully");
         fetchCenterFarmers();
 
-
         }
+
         catch (e) { 
             showAlert("Something went wrong", "error")
         } 
@@ -105,7 +109,7 @@ export default function AddFarmerModal({modalName}){
 
     <h3 className="font-bold text-lg">Add Farmer</h3>
     
-    <form className="mt-8" onSubmit={handleSubmit}>
+    {!storedDb &&  <form className="mt-8" onSubmit={handleSubmit}>
                   <div className="">
                     <label className="block mb-2 text-sm "> Name</label>
                     <input
@@ -225,8 +229,24 @@ export default function AddFarmerModal({modalName}){
                       </button>
                     )}
                   </div>
-                </form>
+    </form>  }
 
+    {storedDb && <div className="">
+      <span className="py-4 text-success">Date stored in the database</span>
+      </div>
+      }
+
+    {(storedDb && !storedBC) &&
+    <div className=""> 
+    <span className="py-4 text-info">Storing to blockchain....</span>
+    </div>
+    }
+
+    {storedBC && <span className="py-4">
+      
+      Stored at blockchain network. URL is <a className="text-primary" target="_blank" href={bcURL}>{bcURL}</a>
+      
+      </span>}
   </div>
   <form method="dialog" className="modal-backdrop">
     <button>close</button>

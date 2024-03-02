@@ -67,7 +67,7 @@ export default async function handler(req, res) {
           try {
             const { id, ...updatedData } = req.body;
             const updatedVanContainer = await VanContainer.findByIdAndUpdate(id, updatedData, { new: true });
-            await updatedVanContainer.populate(['farmerId',])
+            // await updatedVanContainer.populate(['farmerId',])
             res.status(200).json(updatedVanContainer);
           } catch (error) {
             console.error(error);

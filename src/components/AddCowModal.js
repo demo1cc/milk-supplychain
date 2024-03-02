@@ -27,9 +27,14 @@ export default function AddCowModal({modalName}){
     formData['farmerId'] = authUser._id;
     let data = await myFetch(url, "POST", formData);
 
-    // console.log(data);
+    console.log(data);
 
-    // setFormData({});
+
+    setFormData({
+      breed:"",
+      age:"",
+      milkingSystem:""
+    });
     // setSubmitting(false);
     document.getElementById(modalName).close();
     showAlert("Cow Added Added Successfully");

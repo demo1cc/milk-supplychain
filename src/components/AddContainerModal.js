@@ -23,6 +23,7 @@ export default function AddContainerModal({modalName}){
     e.preventDefault();
     setSubmitting(true);
 
+
     try {
     let url = "/api/farmerContainers"
     formData['farmerId'] = authUser._id;
@@ -30,7 +31,9 @@ export default function AddContainerModal({modalName}){
     let data = await myFetch(url, "POST", formData);
 
     // console.log(data);
-    // setFormData({})
+    setFormData({
+      maxCapacity:"",
+    })
 
     // setSubmitting(false);
     document.getElementById(modalName).close();

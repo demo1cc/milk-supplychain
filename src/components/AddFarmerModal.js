@@ -232,7 +232,7 @@ export default function AddFarmerModal({modalName}){
     </form>  }
 
     {storedDb && <div className="">
-      <span className="py-4 text-success">Date stored in the database</span>
+      <span className="py-4 text-success">Data stored in the database</span>
       </div>
       }
 
@@ -244,7 +244,7 @@ export default function AddFarmerModal({modalName}){
 
     {storedBC && <span className="py-4">
       
-      Stored at blockchain network. URL is <a className="text-primary" target="_blank" href={bcURL}>{bcURL}</a>
+      Data stored at blockchain network. URL is <a className="text-primary" target="_blank" href={bcURL}>{bcURL}</a>
       
       </span>}
   </div>

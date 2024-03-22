@@ -61,6 +61,22 @@ export default function ProductCheck() {
 
 
 
+  const storeToBlockchain = async (data) => {
+    let url = "/api/contract/productQualities"
+    let formData1 = {
+      _id: data._id ? data._id:"",
+      centerId:data.centerId ? data.centerId: "",
+      productName: data.productName ? data.productName:"",
+      quantity:data.quantity ? data.quantity: "",
+      temperature:data?.quality?.temperature ? data?.quality?.temperature: "",
+      fat:data?.quality?.fat ? data?.quality?.fat: "",
+      protein:data?.quality?.protein ? data?.quality?.protein: "", 
+    }
+
+    let data1 = await myFetch(url, "POST", formData1);
+
+    console.log(data1);
+  }
   
         
   const handleSubmit = async (e) => {
@@ -101,6 +117,7 @@ export default function ProductCheck() {
     setSelected("");
 
     setSubmittedDB(true);
+    storeToBlockchain(data);
     changeStatusToStored();
 
     // setSubmitting(false);

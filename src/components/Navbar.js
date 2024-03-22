@@ -115,6 +115,15 @@ const Navbar = () => {
               </li>
                 }
 
+            {(token && authUser.role==="center") && <li>
+                  <Link href={"/blockchain"}>
+                  <button className="justify-between">
+                    Blockchain
+                  </button>
+                  </Link>
+              </li>
+                }
+
               <li>
                 {token && (
                   <button className="justify-between" onClick={logout}>

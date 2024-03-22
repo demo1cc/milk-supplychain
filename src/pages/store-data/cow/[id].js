@@ -25,6 +25,24 @@ export default function StoreCowData () {
         setQuality({ ...quality, [e.target.name]: e.target.value });
       };
     
+  const addToBlockChain = async ( data ) => {
+    let url = "/api/contract/cowMilkQualities"
+    let formData1 = {
+      _id: data._id ? data._id:"",
+      cowId:data.cowId ? data.cowId: "",
+      quantity:data.quantity ? data.quantity: "",
+      temperature:data?.quality?.temperature ? data?.quality?.temperature: "",
+      fat:data?.quality?.fat ? data?.quality?.fat: "",
+      protein:data?.quality?.protein ? data?.quality?.protein: "", 
+    }
+    console.log(formData1);
+
+    let data1 = await myFetch(url, "POST", formData1);
+
+    console.log(data1);
+
+  }
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
@@ -43,6 +61,8 @@ export default function StoreCowData () {
 
     setQuality({}); setQuantity(null);
     setSubmittedDB(true);
+
+    addToBlockChain(data);
 
     // setSubmitting(false);
     showAlert("Cow Milk Dada Stored Successfully")

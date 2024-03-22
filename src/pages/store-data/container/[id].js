@@ -130,7 +130,7 @@ export default function StoreCowData () {
     changeStatusCowMilkQualities();
     setSubmittedDB(true);
 
-    // setSubmitting(false);
+    setSubmitting(false);
     showAlert("Container data stored successfully")
     
     }
@@ -148,6 +148,7 @@ export default function StoreCowData () {
 
         // console.log(data);
 
+        setSubmitting(false);
         
 
         setQuality({}); setQuantity(null);
@@ -184,7 +185,7 @@ export default function StoreCowData () {
         showAlert("Something went wrong", "error")
     } 
     finally{
-        setSubmitting(false);
+        // setSubmitting(false);
     }
     
     // console.log(name, email, password, address);

@@ -1,6 +1,7 @@
 import Web3 from "web3";
 
-import userABI from "@/sol/abis/UserABI";
+// import userABI from "@/sol/abis/UserABI";
+import cowABI from "@/sol/abis/CowABI";
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
@@ -8,7 +9,7 @@ const web3 = new Web3(
   ),
 );
 
-const contractAddress = "0xf43B7ea3fA7aE5D614395E554d391114c3B8a96e";
+const contractAddress = "0xc53096c3F2A36413bFC1DD61B963614d9902f627";
 
 const signer = web3.eth.accounts.privateKeyToAccount(
     process.env.PRIVATE_KEY
@@ -17,7 +18,7 @@ const signer = web3.eth.accounts.privateKeyToAccount(
 web3.eth.accounts.wallet.add(signer);
 
 const contract = new web3.eth.Contract(
-    userABI,
+    cowABI,
     contractAddress,
 );
 
@@ -28,38 +29,31 @@ export default async function handler(req, res) {
 
     switch (req.method ) {
         case "GET":
-            const users =  await contract.methods.getUsers(process.env.PUBLIC_KEY).call()
-            const jsonString = JSON.stringify(users, bigIntReplacer);
+            const cows =  await contract.methods.getCows(process.env.PUBLIC_KEY).call()
+            const jsonString = JSON.stringify(cows, bigIntReplacer);
             res.status(200).send(jsonString);
             
             break
+
         
         case "POST":
-            let userData = {
+            let cowData = {
                 _id: req.body._id ? req.body._id:"",
-                name:req.body.name ? req.body.name: "",
-                role:req.body.role ? req.body.role: "",
-                mobile:req.body.mobile ? req.body.mobile: "",
-                password:req.body.password ? req.body.password: "",
-                email:req.body.email ? req.body.email: "", 
-                address1:req.body.address1 ? req.body.address1: "",
-                address2:req.body.address2 ? req.body.address2: "",
-                city:req.body.city ? req.body.city: "",
-                state:req.body.state ? req.body.state: "",
-                pin:req.body.pin ? req.body.pin: ""
+                farmerId:req.body.farmerId ? req.body.farmerId: "",
+                cowNumber:req.body.cowNumber ? req.body.cowNumber: "",
+                food:req.body.food ? req.body.food: "",
+                milkingSystem:req.body.milkingSystem ? req.body.milkingSystem: "",
+                breed:req.body.breed ? req.body.breed: "", 
+                age:req.body.age ? req.body.age: "",
             }
-            const method_abi = contract.methods.createUser(
-                userData._id,
-                userData.name,
-                userData.role,
-                userData.mobile,
-                userData.password,
-                userData.email,
-                userData.address1,
-                userData.address2,
-                userData.city,
-                userData.state,
-                userData.pin
+            const method_abi = contract.methods.createCow(
+                cowData._id,
+                cowData.farmerId,
+                cowData.cowNumber,
+                cowData.food,
+                cowData.milkingSystem,
+                cowData.breed,
+                cowData.age
               ).encodeABI();
         
             const tx = {

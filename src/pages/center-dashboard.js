@@ -14,6 +14,19 @@ export default function CenterDashBoard() {
 
     const {token} = useAuth();
 
+    const [domain, setDomain] = React.useState("");
+
+    React.useEffect(() => {
+
+      const protocol = typeof window !== 'undefined' ? window.location.protocol : '';
+      const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
+    
+      // Combine protocol and hostname to get the complete domain
+      const domain = protocol + '//' + hostname;
+      setDomain(domain);
+    //   console.log(domain);
+    },[])
+
     if (!token) { 
         return (
             <LoginRequired />
@@ -24,10 +37,23 @@ export default function CenterDashBoard() {
         <div className="bg-base-100 min-h-screen px-4 md:px-8 py-4">
 
 
+
+            <div className="dropdown">
+                <div tabIndex={0} role="button" className="btn btn-sm mb-4 mr-2 btn-secondary">Generate QR</div>
+                <ul tabIndex={0}  className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                    <li><a target="_blank" href={"https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+ domain+"/store-data/center"}>Center Container</a></li>
+                    <li><a target="_blank" href={"https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+ domain+"/store-data/preproduct"}>Pre Product</a></li>
+                    <li><a target="_blank" href={"https://api.qrserver.com/v1/create-qr-code/?size=240x240&data="+ domain+"/store-data/product"}>Product</a></li>
+
+                </ul>
+            </div>
+
+
+            <div>
             <Link href={"/store-data/center"}> <button className="btn btn-sm mb-4 mr-2">Store data at center</button> </Link>
             <Link href={"/store-data/preproduct"}> <button className="btn btn-sm mb-4 mr-2">Store data for pre product</button> </Link>
             <Link href={"/store-data/product"}> <button className="btn btn-sm mb-4 mr-2">Store data for product</button> </Link>
-
+            </div>
             <div className="grid md:grid-cols-2 gap-4">
                 <div className="bg-base-200 card p-4">
 

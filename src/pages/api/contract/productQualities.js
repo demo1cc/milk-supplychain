@@ -1,6 +1,6 @@
 import Web3 from "web3";
 
-import userABI from "@/sol/abis/UserABI";
+import ABI from "@/sol/abis/ProductQualityABI";
 
 const web3 = new Web3(
   new Web3.providers.HttpProvider(
@@ -8,7 +8,7 @@ const web3 = new Web3(
   ),
 );
 
-const contractAddress = "0xf43B7ea3fA7aE5D614395E554d391114c3B8a96e";
+const contractAddress = "0xadAE5613Fa0889c1D7Fcd6dE772A8C56dC96F015";
 
 const signer = web3.eth.accounts.privateKeyToAccount(
     process.env.PRIVATE_KEY
@@ -17,49 +17,44 @@ const signer = web3.eth.accounts.privateKeyToAccount(
 web3.eth.accounts.wallet.add(signer);
 
 const contract = new web3.eth.Contract(
-    userABI,
+    ABI,
     contractAddress,
 );
 
 // console.log(signer);
+
 import bigIntReplacer from "@/utils/bigIntReplacer";
 
 export default async function handler(req, res) {
 
     switch (req.method ) {
         case "GET":
-            const users =  await contract.methods.getUsers(process.env.PUBLIC_KEY).call()
-            const jsonString = JSON.stringify(users, bigIntReplacer);
+            const data =  await contract.methods.getProductQualitys(process.env.PUBLIC_KEY).call()
+            // console.log(users[users.length - 1])
+            const jsonString = JSON.stringify(data, bigIntReplacer);
             res.status(200).send(jsonString);
             
             break
+
         
         case "POST":
-            let userData = {
+            let qualityData = {
                 _id: req.body._id ? req.body._id:"",
-                name:req.body.name ? req.body.name: "",
-                role:req.body.role ? req.body.role: "",
-                mobile:req.body.mobile ? req.body.mobile: "",
-                password:req.body.password ? req.body.password: "",
-                email:req.body.email ? req.body.email: "", 
-                address1:req.body.address1 ? req.body.address1: "",
-                address2:req.body.address2 ? req.body.address2: "",
-                city:req.body.city ? req.body.city: "",
-                state:req.body.state ? req.body.state: "",
-                pin:req.body.pin ? req.body.pin: ""
+                cowId:req.body.cowId ? req.body.cowId: "",
+                productName:req.body.productName ? req.body.productName: "",
+                quantity:req.body.quantity ? req.body.quantity: "",
+                temperature:req.body.temperature ? req.body.temperature: "",
+                fat:req.body.fat ? req.body.fat: "",
+                protein:req.body.protein ? req.body.protein: "", 
             }
-            const method_abi = contract.methods.createUser(
-                userData._id,
-                userData.name,
-                userData.role,
-                userData.mobile,
-                userData.password,
-                userData.email,
-                userData.address1,
-                userData.address2,
-                userData.city,
-                userData.state,
-                userData.pin
+            const method_abi = contract.methods.createData(
+                qualityData._id,
+                qualityData.cowId,
+                qualityData.productName,
+                String(qualityData.quantity),
+                String(qualityData.temperature),
+                String(qualityData.fat),
+                String(qualityData.protein),
               ).encodeABI();
         
             const tx = {

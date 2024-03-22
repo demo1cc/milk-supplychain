@@ -17,6 +17,23 @@ export default function AddCowModal({modalName}){
       setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
+  const storeToBlockchain = async (cowData) => {
+    let url = "/api/contract/cows"
+    let formData1 = {
+      _id: cowData._id ? cowData._id:"",
+      farmerId:cowData.farmerId ? cowData.farmerId: "",
+      cowNumber:cowData.cowNumber ? cowData.cowNumber: "",
+      food:cowData.food ? cowData.food: "",
+      milkingSystem:cowData.milkingSystem ? cowData.milkingSystem: "",
+      breed:cowData.breed ? cowData.breed: "", 
+      age:cowData.age ? cowData.age: "",
+    }
+
+    let data = await myFetch(url, "POST", formData1);
+
+    console.log(data);
+  }
+
   const handleSubmit = async (e) => {
 
     e.preventDefault();
@@ -29,6 +46,8 @@ export default function AddCowModal({modalName}){
 
     console.log(data);
 
+    storeToBlockchain(data);
+    // showAlert("Cow Added to blockchain Successfully");
 
     setFormData({
       breed:"",
@@ -37,8 +56,9 @@ export default function AddCowModal({modalName}){
     });
     // setSubmitting(false);
     document.getElementById(modalName).close();
-    showAlert("Cow Added Added Successfully");
+    showAlert("Cow Added Successfully");
     fetchFarmerCows();
+
     }
     catch (e) { 
         showAlert("Something went wrong", "error")

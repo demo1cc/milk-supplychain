@@ -43,6 +43,49 @@ const cowABI = [
 		"type": "event"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_id",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_farmerId",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_cowNumber",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_food",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_milkingSystem",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_breed",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_age",
+				"type": "uint256"
+			}
+		],
+		"name": "createCow",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
@@ -117,49 +160,6 @@ const cowABI = [
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "string",
-				"name": "_id",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_farmerId",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_cowNumber",
-				"type": "uint256"
-			},
-			{
-				"internalType": "string",
-				"name": "_food",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_milkingSystem",
-				"type": "string"
-			},
-			{
-				"internalType": "string",
-				"name": "_breed",
-				"type": "string"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_age",
-				"type": "uint256"
-			}
-		],
-		"name": "createCow",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{

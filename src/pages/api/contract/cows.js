@@ -9,7 +9,7 @@ const web3 = new Web3(
   ),
 );
 
-const contractAddress = "0xc53096c3F2A36413bFC1DD61B963614d9902f627";
+const contractAddress = "0x33e9E8F4D4B3aE56696DDa849b5D57736b5Fd5aD";
 
 const signer = web3.eth.accounts.privateKeyToAccount(
     process.env.PRIVATE_KEY

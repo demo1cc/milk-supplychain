@@ -67,9 +67,9 @@ export default function Blockchain(){
 
             {showFarmers && <div className="my-2">
 
-                {farmers.map(farmer => 
+                {farmers.map((farmer,index ) => 
                 
-                    <p>{JSON.stringify(farmer)}</p>
+                    <p key={index}>{JSON.stringify(farmer)}</p>
                 )}
             </div>}
 
@@ -79,9 +79,9 @@ export default function Blockchain(){
 
             {showCows && <div className="my-2">
 
-                {cows.map(cow => 
+                {cows.map((cow,i) => 
                 
-                    <p>{JSON.stringify(cow)}</p>
+                    <p key={i}>{JSON.stringify(cow)}</p>
                 )}
             </div>}
 
@@ -91,9 +91,9 @@ export default function Blockchain(){
 
             {showMilkData && <div className="my-2">
 
-            {cowMilkData.map(data => 
+            {cowMilkData.map((data,i) => 
 
-                <p>{JSON.stringify(data)}</p>
+                <p key={i}>{JSON.stringify(data)}</p>
             )}
             </div>}
 
@@ -106,9 +106,9 @@ export default function Blockchain(){
 
             {showProductData && <div className="my-2">
 
-                {productData.map(data => 
+                {productData.map((data,i) => 
 
-                    <p>{JSON.stringify(data)}</p>
+                    <p key={i}>{JSON.stringify(data)}</p>
                 )}
                 </div>}
 

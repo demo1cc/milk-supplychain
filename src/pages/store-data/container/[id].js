@@ -32,9 +32,6 @@ export default function StoreCowData () {
             // setDataLoaded(true);
             // console.log("fsdfasdfad")
             fetchContainerMilkQuality();
-
-        } else {
-            setDataLoaded(true);
         }
     },[authUser, id]);
 
@@ -62,6 +59,8 @@ export default function StoreCowData () {
         // console.log(data);
         if (authUser?.role === 'farmer') { 
             getUnstoredCowMilks();
+        } else {
+
         }
     }
 
@@ -79,14 +78,9 @@ export default function StoreCowData () {
 
     React.useEffect(()=>{
 
-
-
         if (id) { 
             fetchContainer();
-
-        }
-
-        
+        }     
     },[id])
 
     // console.log(id);
@@ -235,6 +229,10 @@ export default function StoreCowData () {
                         The data is already stored for this container. You can not store the data again for this container.
                     </h1>
                 </div>}
+
+                {
+
+                }
 
                {((authUser?.role==="farmer" && cowMilkQualityIds?.length>0) || containerMilkQuality ) && <div>
                 <h1 className='text-xl'>Enter the data for the container </h1>

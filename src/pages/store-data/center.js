@@ -3,6 +3,7 @@ import { useAuth } from "@/context/AuthContext"
 import LoginRequired from "@/components/LoginRequired"
 import React from "react";
 import { showAlert } from "@/utils/showAlert";
+import { set } from "mongoose";
 
 export default function StoreDataCenter() {
 
@@ -14,6 +15,7 @@ export default function StoreDataCenter() {
     const [submitting, setSubmitting] = React.useState(false);
     const [quality, setQuality] = React.useState({});
     const [quantity, setQuantity] = React.useState(null);
+    const [totalQuantityGot, setTotalQuantityGot] = React.useState();
 
     const [containerMilkQualityCenters, setContainerMilkQualityCenters] = React.useState([]);
 
@@ -76,7 +78,16 @@ export default function StoreDataCenter() {
         let data = await myFetch(url);
         let array = data.containerMilkQualityCenters;
         setContainerMilkQualityCenters(array);
+
+        let total = 0 
+        for (let i of array) {
+          // console.log(i);
+          total = total + i?.quantity;
+        }
+        console.log(total);
+        setTotalQuantityGot(total);
         // console.log(array);
+
         const containerIds = array.map(item => item.containerId);
         // console.log(containerIds);
         setContainerIds(containerIds);
@@ -114,7 +125,7 @@ export default function StoreDataCenter() {
                 {containerIds.length>0 && <div>
 
                 <h1 className='text-xl'>Enter the Data</h1>
-                <h1 className='text opacity-60'>{containerIds.length} containers found</h1>
+                <h1 className='text opacity-60'>{containerIds.length} containers found | Total Quantity - {totalQuantityGot}</h1>
 
 
 
